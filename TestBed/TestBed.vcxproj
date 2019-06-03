@@ -76,11 +76,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\Vendor\GLFW\include;$(SolutionDir)OpenGL\Vendor\GLEW\include;$(SolutionDir)OpenGL\Vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)OpenGL\Vendor\GLFW\lib-vc2015;$(SolutionDir)OpenGL\Vendor\GLEW\lib\Debug\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)TestBed\Vendor\GLFW\lib-vc2015;$(SolutionDir)TestBed\Vendor\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
