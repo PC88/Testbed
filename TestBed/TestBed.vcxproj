@@ -121,9 +121,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Src\BST\Node.cpp" />
+    <ClCompile Include="Src\Demos\Demo.cpp" />
+    <ClCompile Include="Src\Demos\DemoManager.cpp" />
+    <ClCompile Include="Src\QuadTree\QuadTree.cpp" />
     <ClCompile Include="Vendor\glm\detail\glm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\BST\Node.h" />
+    <ClInclude Include="Src\Demos\Demo.h" />
+    <ClInclude Include="Src\Demos\DemoManager.h" />
+    <ClInclude Include="Src\QuadTree\QuadTree.h" />
     <ClInclude Include="Vendor\glm\common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_vector_relational.hpp" />
