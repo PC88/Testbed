@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor;$(SolutionDir)TestBed\Src;$(SolutionDir)TestBed\Vendor\SPD-include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)TestBed\Vendor\GLFW\lib-vc2015;$(SolutionDir)TestBed\Vendor\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
@@ -121,16 +121,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Src\BST\Node.cpp" />
+    <ClCompile Include="Src\BST\BSTNode.cpp" />
     <ClCompile Include="Src\Demos\Demo.cpp" />
     <ClCompile Include="Src\Demos\DemoManager.cpp" />
+    <ClCompile Include="Src\Logger\Logger.cpp" />
     <ClCompile Include="Src\QuadTree\QuadTree.cpp" />
     <ClCompile Include="Vendor\glm\detail\glm.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Vendor\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\BST\Node.h" />
+    <ClInclude Include="Src\BST\BSTNode.h" />
     <ClInclude Include="Src\Demos\Demo.h" />
     <ClInclude Include="Src\Demos\DemoManager.h" />
+    <ClInclude Include="Src\Logger\Logger.h" />
     <ClInclude Include="Src\QuadTree\QuadTree.h" />
     <ClInclude Include="Vendor\glm\common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_common.hpp" />
@@ -372,6 +380,14 @@
     <ClInclude Include="Vendor\glm\vec3.hpp" />
     <ClInclude Include="Vendor\glm\vec4.hpp" />
     <ClInclude Include="Vendor\glm\vector_relational.hpp" />
+    <ClInclude Include="Vendor\imgui\imconfig.h" />
+    <ClInclude Include="Vendor\imgui\imgui.h" />
+    <ClInclude Include="Vendor\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Vendor\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="Vendor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Vendor\imgui\imstb_textedit.h" />
+    <ClInclude Include="Vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vendor\glm\detail\func_common.inl" />

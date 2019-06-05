@@ -1,51 +1,50 @@
-#include "Node.h"
+#include "BSTNode.h"
 #include "iostream"
-//#include "Src\App\LogSystem\Logger.h"
 /// REFERENCES
 /// A great deal of this code was learned from tutorials at https://www.youtube.com/channel/UClEEsT7DkdVO_fkrBw0OTrA
 /// this proved to be a great learning resource for this particular task
 /// there is also some input from "Data Structures & Algorithms in C++" Second edition.
 
-Node::Node(int ID, Species spec, TimePeriod tp, DinoType dt)
-	:dinoID(ID), species(spec), timePeriod(tp), dinoType(dt)
+BSTNode::BSTNode(int ID)
+	:m_ID(ID)
 {
 }
 
-Node::~Node()
+BSTNode::~BSTNode()
 {
 }
 
-Node * Node::Insert(Node* root, int ID, Species s, TimePeriod tp, DinoType dt)
+BSTNode * BSTNode::Insert(BSTNode* root, int ID)
 {
 	if (root == nullptr) // root
 	{
-		root = GetNewNode(ID, s, tp, dt);
+		root = GetNewBSTNode(ID);
 	}
-	else if (ID <= root->dinoID) // left
+	else if (ID <= root->m_ID) // left
 	{
-		root->left = Insert(root->left, ID, s, tp, dt);
+		root->left = Insert(root->left, ID);
 	}
 	else // right
 	{
-		root->right = Insert(root->right, ID, s, tp, dt);
+		root->right = Insert(root->right, ID);
 	}
 	return root;
 }
 
 
-Node * Node::DeleteNode(Node * root, int ID)
+BSTNode * BSTNode::DeleteBSTNode(BSTNode * root, int ID)
 {
 	if (root == nullptr)
 	{
 		return root;
 	}
-	else if (ID < root->dinoID)
+	else if (ID < root->m_ID)
 	{
-		root->left = DeleteNode(root, ID);
+		root->left = DeleteBSTNode(root, ID);
 	}
-	else if (ID > root->dinoID)
+	else if (ID > root->m_ID)
 	{
-		root->right = DeleteNode(root->right, ID);
+		root->right = DeleteBSTNode(root->right, ID);
 	}
 	else
 	{
@@ -56,27 +55,27 @@ Node * Node::DeleteNode(Node * root, int ID)
 		}
 		else if (root->left == nullptr) // case 2 One child
 		{
-			Node* temp = root;
+			BSTNode* temp = root;
 			root = root->right;
 			delete temp;
 		}
 		else if (root->right == nullptr)
 		{
-			Node* temp = root;
+			BSTNode* temp = root;
 			root = root->left;
 			delete temp;
 		}
 		else // case 3 two children
 		{
-			Node* temp = FindMin(root->right);
-			root->dinoID = temp->dinoID;
-			root->right = DeleteNode(root->right, temp->dinoID);
+			BSTNode* temp = FindMin(root->right);
+			root->m_ID = temp->m_ID;
+			root->right = DeleteBSTNode(root->right, temp->m_ID);
 		}
 	}
 	return root;
 }
 
-Node * Node::FindMin(Node * root)
+BSTNode * BSTNode::FindMin(BSTNode * root)
 {
 	if (root->left)
 	{
@@ -85,20 +84,20 @@ Node * Node::FindMin(Node * root)
 	return root;
 }
 
-Node * Node::GetNewNode(int ID, Species s, TimePeriod tp, DinoType dt)
+BSTNode * BSTNode::GetNewBSTNode(int ID)
 {
-	Node* newNode = new Node(ID, s, tp, dt);
-	return newNode;
+	BSTNode* newBSTNode = new BSTNode(ID);
+	return newBSTNode;
 }
 
-bool Node::IsBinarySearchTree(Node * root)
+bool BSTNode::IsBinarySearchTree(BSTNode * root)
 {
 	if (root == nullptr)
 	{
 		return true;
 	}
-	if (IsSubtreeLesser(root->left, root->dinoID)
-		&& IsSubtreeGreater(root->right, root->dinoID)
+	if (IsSubtreeLesser(root->left, root->m_ID)
+		&& IsSubtreeGreater(root->right, root->m_ID)
 		&& IsBinarySearchTree(root->left)
 		&& IsBinarySearchTree(root->right))
 	{
@@ -110,13 +109,13 @@ bool Node::IsBinarySearchTree(Node * root)
 	}
 }
 
-bool Node::IsSubtreeLesser(Node * root, int ID)
+bool BSTNode::IsSubtreeLesser(BSTNode * root, int ID)
 {
 	if (root == nullptr)
 	{
 		return true;
 	}
-	if (root->dinoID <= ID
+	if (root->m_ID <= ID
 		&& IsSubtreeLesser(root->left, ID)
 		&& IsSubtreeLesser(root->right, ID))
 	{
@@ -128,13 +127,13 @@ bool Node::IsSubtreeLesser(Node * root, int ID)
 	}
 }
 
-bool Node::IsSubtreeGreater(Node * root, int ID)
+bool BSTNode::IsSubtreeGreater(BSTNode * root, int ID)
 {
 	if (root == nullptr)
 	{
 		return true;
 	}
-	if (root->dinoID > ID
+	if (root->m_ID > ID
 		&& IsSubtreeGreater(root->left, ID)
 		&& IsSubtreeGreater(root->right, ID))
 	{
@@ -146,7 +145,7 @@ bool Node::IsSubtreeGreater(Node * root, int ID)
 	}
 }
 
-Node* Node::Search(Node * root, int ID, TraversalType tt) // the tree you wish to search, the ID of what you want, the type of traversal you want -PARAMS
+BSTNode* BSTNode::Search(BSTNode * root, int ID, TraversalType tt) // the tree you wish to search, the ID of what you want, the type of traversal you want -PARAMS
 {
 	if (tt == TraversalType::Inorder)
 	{
@@ -162,17 +161,17 @@ Node* Node::Search(Node * root, int ID, TraversalType tt) // the tree you wish t
 	}
 }
 
-Node * Node::InorderSearch(Node * root, int ID)
+BSTNode * BSTNode::InorderSearch(BSTNode * root, int ID)
 {
 	if (root == nullptr) // first null check
 	{
 		return root;
 	}
-	else if (ID < root->dinoID) // left 
+	else if (ID < root->m_ID) // left 
 	{
 		return InorderSearch(root->left, ID);
 	}
-	else if (root->dinoID == ID) // root
+	else if (root->m_ID == ID) // root
 	{
 		return root;
 	}
@@ -182,17 +181,17 @@ Node * Node::InorderSearch(Node * root, int ID)
 	}
 }
 
-Node * Node::PreorderSearch(Node * root, int ID)
+BSTNode * BSTNode::PreorderSearch(BSTNode * root, int ID)
 {
 	if (root == nullptr) // first null check
 	{
 		return root;
 	}
-    if (root->dinoID == ID) // root
+    if (root->m_ID == ID) // root
 	{
 		return root;
 	}
-	else if (ID < root->dinoID) // left
+	else if (ID < root->m_ID) // left
 	{
 		return PreorderSearch(root->left, ID);
 	}
@@ -202,17 +201,17 @@ Node * Node::PreorderSearch(Node * root, int ID)
 	}
 }
 
-Node * Node::PostorderSearch(Node * root, int ID)
+BSTNode * BSTNode::PostorderSearch(BSTNode * root, int ID)
 {
 	if (root == nullptr) // first null check
 	{
 		return root;
 	}
-	if (ID < root->dinoID) // left
+	if (ID < root->m_ID) // left
 	{
 		return PreorderSearch(root->left, ID);
 	}
-	else if (ID > root->dinoID) // right
+	else if (ID > root->m_ID) // right
 	{
 		PreorderSearch(root->right, ID);
 	}
@@ -222,10 +221,7 @@ Node * Node::PostorderSearch(Node * root, int ID)
 	}
 }
 
-void Node::Print(Node * root)
+void BSTNode::Print(BSTNode * root)
 {
-	std::cout << "Dino ID: " << root->dinoID << std::endl;
-	std::cout << "Dino Species: " << root->species << std::endl;
-	std::cout << "Dino TimePeriod: " << root->timePeriod << std::endl;
-	std::cout << "Dino Type: " << root->dinoType << std::endl;
+	std::cout << "Dino ID: " << root->m_ID << std::endl;
 }
