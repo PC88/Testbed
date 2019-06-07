@@ -25,6 +25,11 @@
 // Timer
 #include "Timer\LPTimer.h"
 
+
+/// TODO: add box2D and implement DebugDraw /// 
+
+
+
 int main(int, char**)
 {
 	Logger::Init(); // init logger -PC
