@@ -79,7 +79,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor;$(SolutionDir)TestBed\Src;$(SolutionDir)TestBed\Vendor\SPD-include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)TestBed\Vendor\GLFW\lib-vc2015;$(SolutionDir)TestBed\Vendor\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)TestBed\Vendor\GLFW\lib-vc2015;$(SolutionDir)TestBed\Vendor\GLEW\lib\Release\Win32;$(SolutionDir)TestBed\Vender\Box2D\bin\x86_64</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
