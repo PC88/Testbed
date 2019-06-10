@@ -13,7 +13,10 @@
 #include "imgui\imgui_impl_opengl3.h"
 
 // OpenGL
-#include <GL\glew.h>
+// extensions
+//#include <GL\glew.h>
+#include "glad/glad.h"
+// windowing and context
 #include <GLFW\glfw3.h>
 
 // Demos
@@ -25,10 +28,11 @@
 // Timer
 #include "Timer\LPTimer.h"
 
+// Box2D
+#include "Box2D\Box2D.h"
+
 
 /// TODO: add box2D and implement DebugDraw /// 
-
-
 
 int main(int, char**)
 {
@@ -60,10 +64,16 @@ int main(int, char**)
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1); // sets frame rate = refresh rate
 
-	if (glewInit() != GLEW_OK)
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		std::cout << "Error!" << std::endl;
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return -1;
 	}
+
+	//if (glewInit() != GLEW_OK)
+	//{
+	//	std::cout << "Error!" << std::endl;
+	//}
 
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	{ // this scope exists to deal with the issue of GL`s error being infinite looped - TODO heap allocate so this dose not exist -PC
