@@ -15,7 +15,6 @@
 // OpenGL
 // extensions
 #include <GL\glew.h>
-//#include "glad\glad.h"
 // windowing and context
 #include <GLFW\glfw3.h>
 
@@ -31,8 +30,6 @@
 // Box2D
 #include "Box2D\Box2D.h"
 
-
-/// TODO: add box2D and implement DebugDraw /// 
 
 int main(int, char**)
 {

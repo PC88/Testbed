@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor;$(SolutionDir)TestBed\Src;$(SolutionDir)TestBed\Vendor\SPD-include;$(SolutionDir)TestBed\Vendor\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TestBed\Vendor\GLFW\include;$(SolutionDir)TestBed\Vendor\GLEW\include;$(SolutionDir)TestBed\Vendor;$(SolutionDir)TestBed\Src;$(SolutionDir)TestBed\Vendor\SPD-include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)TestBed\Vendor\GLFW\lib-vc2015;$(SolutionDir)TestBed\Vendor\GLEW\lib\Release\Win32;$(SolutionDir)TestBed\Vender\Box2D\bin\x86_64</AdditionalLibraryDirectories>
@@ -178,7 +178,6 @@
     <ClCompile Include="Vendor\Box2D\Dynamics\Joints\b2RopeJoint.cpp" />
     <ClCompile Include="Vendor\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="Vendor\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
-    <ClCompile Include="Vendor\glad\src\glad.c" />
     <ClCompile Include="Vendor\glm\detail\glm.cpp" />
     <ClCompile Include="Vendor\imgui\imgui.cpp" />
     <ClCompile Include="Vendor\imgui\imgui_demo.cpp" />
@@ -246,8 +245,6 @@
     <ClInclude Include="Vendor\Box2D\Dynamics\Joints\b2RopeJoint.h" />
     <ClInclude Include="Vendor\Box2D\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="Vendor\Box2D\Dynamics\Joints\b2WheelJoint.h" />
-    <ClInclude Include="Vendor\glad\include\glad\glad.h" />
-    <ClInclude Include="Vendor\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Vendor\glm\common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="Vendor\glm\detail\compute_vector_relational.hpp" />

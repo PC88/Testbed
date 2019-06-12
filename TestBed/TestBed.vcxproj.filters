@@ -207,9 +207,6 @@
     <ClCompile Include="Vendor\Box2D\Dynamics\Contacts\b2PolygonContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vendor\glad\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vendor\Box2D\Common\DebugDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1128,12 +1125,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vendor\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vendor\glad\include\glad\glad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vendor\glad\include\KHR\khrplatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vendor\Box2D\Common\DebugDraw.h">

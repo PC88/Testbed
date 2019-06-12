@@ -1,1 +1,0 @@
-This is a list of files used from the Box2D Engine in this demo:

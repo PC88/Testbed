@@ -22,18 +22,14 @@
 #define GLFW_INCLUDE_GLCOREARB
 #include <OpenGL/gl3.h>
 #else
-//#include "Testbed/glad/glad.h"
-//#include "glad/glad.h"
 #include <GL\glew.h>
 #endif
 
-//#include "Testbed/glfw/glfw3.h"
 #include <GLFW\glfw3.h> // - replaced -PC
 
 #include <stdio.h>
 #include <stdarg.h>
 
-//#include "Testbed/imgui/imgui.h"
 #include "imgui/imgui.h" // - replaced -PC
 
 #define BUFFER_OFFSET(x)  ((const void*) (x))
