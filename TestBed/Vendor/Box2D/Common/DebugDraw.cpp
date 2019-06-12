@@ -23,7 +23,8 @@
 #include <OpenGL/gl3.h>
 #else
 //#include "Testbed/glad/glad.h"
-#include "glad/glad.h"
+//#include "glad/glad.h"
+#include <GL\glew.h>
 #endif
 
 //#include "Testbed/glfw/glfw3.h"

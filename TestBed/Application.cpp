@@ -14,8 +14,8 @@
 
 // OpenGL
 // extensions
-//#include <GL\glew.h>
-#include "glad/glad.h"
+#include <GL\glew.h>
+//#include "glad\glad.h"
 // windowing and context
 #include <GLFW\glfw3.h>
 
@@ -64,16 +64,16 @@ int main(int, char**)
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1); // sets frame rate = refresh rate
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
-
-	//if (glewInit() != GLEW_OK)
+	//if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	//{
-	//	std::cout << "Error!" << std::endl;
+	//	std::cout << "Failed to initialize GLAD" << std::endl;
+	//	return -1;
 	//}
+
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "Error!" << std::endl;
+	}
 
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	{ // this scope exists to deal with the issue of GL`s error being infinite looped - TODO heap allocate so this dose not exist -PC
@@ -83,7 +83,6 @@ int main(int, char**)
 
 		const double MS_PER_UPDATE = 0.008; // Nystrom Pattern: Game Loop
 
-		// IMGUI setup, more modern iteration that video`s -PC
 		ImGui::CreateContext();
 		ImGui_ImplOpenGL3_Init("#version 330"); // explicit version statement - PC
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
