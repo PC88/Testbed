@@ -29,6 +29,7 @@
 
 // Box2D
 #include "Box2D\Box2D.h"
+#include "Box2D\Common\DebugDraw.h"
 
 
 int main(int, char**)
@@ -61,11 +62,6 @@ int main(int, char**)
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1); // sets frame rate = refresh rate
 
-	//if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	//{
-	//	std::cout << "Failed to initialize GLAD" << std::endl;
-	//	return -1;
-	//}
 
 	if (glewInit() != GLEW_OK)
 	{
