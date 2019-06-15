@@ -71,10 +71,61 @@ int main(int, char**)
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	{ // this scope exists to deal with the issue of GL`s error being infinite looped - TODO heap allocate so this dose not exist -PC
 
-	    //glEnable(GL_BLEND); //- these may be not needed commented for now -PC
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		const double MS_PER_UPDATE = 0.008; // Nystrom Pattern: Game Loop
+
+			///------------------------------ Box 2D setup ------------------------------------///
+		b2Vec2 gravity(0.0f, -10.0f);
+		b2World world(gravity);
+
+		DebugDraw debugDraw;
+		world.SetDebugDraw(&debugDraw);
+		uint32 flags = 0;
+		flags += b2Draw::e_shapeBit;
+		flags += b2Draw::e_jointBit;
+		flags += b2Draw::e_aabbBit;
+		flags += b2Draw::e_pairBit;
+		flags += b2Draw::e_centerOfMassBit;
+		debugDraw.SetFlags(flags);
+		debugDraw.Create();
+
+		b2BodyDef groundBodyDef;
+		groundBodyDef.position.Set(0.0f, -10.0f);
+		b2Body* groundBody = world.CreateBody(&groundBodyDef);
+
+		b2PolygonShape groundBox;
+		groundBox.SetAsBox(50.0f, 10.0f);
+		groundBody->CreateFixture(&groundBox, 0.0f);
+
+		// Define the dynamic body. We set its position and call the body factory.
+		b2BodyDef bodyDef;
+		bodyDef.type = b2_dynamicBody;
+		bodyDef.position.Set(0.0f, 4.0f);
+		b2Body* body = world.CreateBody(&bodyDef);
+
+		// Define another box shape for our dynamic body.
+		b2PolygonShape dynamicBox;
+		dynamicBox.SetAsBox(1.0f, 1.0f);
+
+		// Define the dynamic body fixture.
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &dynamicBox;
+
+		// Set the box density to be non-zero, so it will be dynamic.
+		fixtureDef.density = 1.0f;
+
+		// Override the default friction.
+		fixtureDef.friction = 0.3f;
+
+		// Add the shape to the body.
+		body->CreateFixture(&fixtureDef);
+
+		// Prepare for simulation. Typically we use a time step of 1/60 of a
+		// second (60Hz) and 10 iterations. This provides a high quality simulation
+		// in most game scenarios.
+		int32 velocityIterations = 6;
+		int32 positionIterations = 2;
+		///------------------------------ Box 2D setup ------------------------------------//
 
 		ImGui::CreateContext();
 		ImGui_ImplOpenGL3_Init("#version 330"); // explicit version statement - PC
@@ -114,12 +165,21 @@ int main(int, char**)
 			{
 				while (lag >= MS_PER_UPDATE)
 				{
+					// Instruct the world to perform a single step of simulation.
+			        // It is generally best to keep the time step and iterations fixed.
+					world.Step(MS_PER_UPDATE, velocityIterations, positionIterations);
+
+					// Now print the position and angle of the body.
+					b2Vec2 position = body->GetPosition();
+					float32 angle = body->GetAngle();
+
+					printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 					currentDemo->Update(MS_PER_UPDATE);
 					lag -= MS_PER_UPDATE;
 				}
-
 				// Game Loop, Pattern used for decoupling -PC, -Robert Nystrom GPP
 				currentDemo->Render();
+				world.DrawDebugData();
 				ImGui::Begin("TestBed Demos");
 				if (currentDemo != demoManager && ImGui::Button("<-"))
 				{
