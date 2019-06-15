@@ -77,7 +77,6 @@ int main(int, char**)
 			///------------------------------ Box 2D setup ------------------------------------///
 		b2Vec2 gravity(0.0f, -10.0f);
 		b2World world(gravity);
-
 		DebugDraw debugDraw;
 		world.SetDebugDraw(&debugDraw);
 		uint32 flags = 0;
@@ -89,36 +88,36 @@ int main(int, char**)
 		debugDraw.SetFlags(flags);
 		debugDraw.Create();
 
-		b2BodyDef groundBodyDef;
-		groundBodyDef.position.Set(0.0f, -10.0f);
-		b2Body* groundBody = world.CreateBody(&groundBodyDef);
+		//b2BodyDef groundBodyDef;
+		//groundBodyDef.position.Set(0.0f, -10.0f);
+		//b2Body* groundBody = world.CreateBody(&groundBodyDef);
 
-		b2PolygonShape groundBox;
-		groundBox.SetAsBox(50.0f, 10.0f);
-		groundBody->CreateFixture(&groundBox, 0.0f);
+		//b2PolygonShape groundBox;
+		//groundBox.SetAsBox(50.0f, 10.0f);
+		//groundBody->CreateFixture(&groundBox, 0.0f);
 
-		// Define the dynamic body. We set its position and call the body factory.
-		b2BodyDef bodyDef;
-		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(0.0f, 4.0f);
-		b2Body* body = world.CreateBody(&bodyDef);
+		//// Define the dynamic body. We set its position and call the body factory.
+		//b2BodyDef bodyDef;
+		//bodyDef.type = b2_dynamicBody;
+		//bodyDef.position.Set(0.0f, 4.0f);
+		//b2Body* body = world.CreateBody(&bodyDef);
 
-		// Define another box shape for our dynamic body.
-		b2PolygonShape dynamicBox;
-		dynamicBox.SetAsBox(1.0f, 1.0f);
+		//// Define another box shape for our dynamic body.
+		//b2PolygonShape dynamicBox;
+		//dynamicBox.SetAsBox(1.0f, 1.0f);
 
-		// Define the dynamic body fixture.
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &dynamicBox;
+		//// Define the dynamic body fixture.
+		//b2FixtureDef fixtureDef;
+		//fixtureDef.shape = &dynamicBox;
 
-		// Set the box density to be non-zero, so it will be dynamic.
-		fixtureDef.density = 1.0f;
+		//// Set the box density to be non-zero, so it will be dynamic.
+		//fixtureDef.density = 1.0f;
 
-		// Override the default friction.
-		fixtureDef.friction = 0.3f;
+		//// Override the default friction.
+		//fixtureDef.friction = 0.3f;
 
-		// Add the shape to the body.
-		body->CreateFixture(&fixtureDef);
+		//// Add the shape to the body.
+		//body->CreateFixture(&fixtureDef);
 
 		// Prepare for simulation. Typically we use a time step of 1/60 of a
 		// second (60Hz) and 10 iterations. This provides a high quality simulation
@@ -155,7 +154,8 @@ int main(int, char**)
 			previousTime = currentTime;
 			lag += elapsedTime;
 
-			glClearColor(0.5f, 0.5f, 0.0f, 1.0f); // cheap can be removed later -PC
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // cheap can be removed later -PC
+			glClear(GL_COLOR_BUFFER_BIT);
 				
 			// UI
 			ImGui_ImplOpenGL3_NewFrame();
@@ -170,10 +170,10 @@ int main(int, char**)
 					world.Step(MS_PER_UPDATE, velocityIterations, positionIterations);
 
 					// Now print the position and angle of the body.
-					b2Vec2 position = body->GetPosition();
-					float32 angle = body->GetAngle();
+					//b2Vec2 position = body->GetPosition();
+					//float32 angle = body->GetAngle();
 
-					printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+					//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 					currentDemo->Update(MS_PER_UPDATE);
 					lag -= MS_PER_UPDATE;
 				}
@@ -205,7 +205,11 @@ int main(int, char**)
 		{
 			delete demoManager;
 		}
+
+		// clean up Box2D draw
+		debugDraw.Destroy();
 	}
+
 	// clean up in general
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui::DestroyContext();
