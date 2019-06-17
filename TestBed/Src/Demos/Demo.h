@@ -9,6 +9,7 @@ public:
 	virtual void ImGuiRender() {};
 	virtual void Update(double interval) {};
 	virtual void Render() {};
-	b2World* m_world; // TODO: this needs to be non null
+	virtual void Box2DStart() {};
+	virtual void Box2DEnd() {};
 };
 

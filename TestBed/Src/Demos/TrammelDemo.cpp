@@ -3,6 +3,8 @@
 
 TrammelDemo::TrammelDemo()
 {
+	Box2DStart(); // create B2D demo world
+
 	// we desire to simulate a top down mechanism, however box2D is by default side on. Hence we must disable the force of gravity -PC
     const b2Vec2 gravity = b2Vec2(0.0f, 0.0f);
 	m_world->SetGravity(gravity);
@@ -299,4 +301,55 @@ TrammelDemo::TrammelDemo()
 
 TrammelDemo::~TrammelDemo()
 {
+	// clean up Box2D draw
+	m_debugDraw.Destroy();
+	Box2DEnd(); // deallocate demo b2World
+}
+
+void TrammelDemo::Box2DStart()
+{
+	///------------------------------ Box 2D setup ------------------------------------///
+	m_gravity = b2Vec2(0.0, -10.0);
+	m_world = new b2World(m_gravity);
+	m_world->SetDebugDraw(&m_debugDraw);
+	m_flags = 0;
+	m_flags += b2Draw::e_shapeBit;
+	m_flags += b2Draw::e_jointBit;
+	m_flags += b2Draw::e_aabbBit;
+	m_flags += b2Draw::e_pairBit;
+	m_flags += b2Draw::e_centerOfMassBit;
+	m_debugDraw.SetFlags(m_flags);
+	m_debugDraw.Create();
+
+	// Prepare for simulation. Typically we use a time step of 1/60 of a
+	// second (60Hz) and 10 iterations. This provides a high quality simulation
+	// in most game scenarios.
+	m_velocityIterations = 6;
+	m_positionIterations = 2;
+	///------------------------------ Box 2D setup ------------------------------------//
+}
+
+void TrammelDemo::Box2DEnd()
+{
+	m_world->~b2World();
+}
+
+void TrammelDemo::Update(double interval)
+{
+
+	// Instruct the world to perform a single step of simulation.
+	// It is generally best to keep the time step and iterations fixed.
+	m_world->Step(interval, m_velocityIterations, m_positionIterations);
+
+	// Now print the position and angle of the body.
+	//b2Vec2 position = body->GetPosition();
+	//float32 angle = body->GetAngle();
+
+	//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+}
+
+void TrammelDemo::Render()
+{
+
+	m_world->DrawDebugData();
 }
