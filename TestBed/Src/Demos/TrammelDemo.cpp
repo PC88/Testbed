@@ -350,6 +350,6 @@ void TrammelDemo::Update(double interval)
 
 void TrammelDemo::Render()
 {
-
 	m_world->DrawDebugData();
+	m_debugDraw.Flush();
 }

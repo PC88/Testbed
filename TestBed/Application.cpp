@@ -71,8 +71,7 @@ int main(int, char**)
 	{ // this scope exists to deal with the issue of GL`s error being infinite looped - TODO heap allocate so this dose not exist -PC
 
 
-		const double MS_PER_UPDATE = 0.008; // Nystrom Pattern: Game Loop
-
+		const double MS_PER_UPDATE = 0.018; // Nystrom Pattern: Game Loop
 
 
 		ImGui::CreateContext();
@@ -112,6 +111,7 @@ int main(int, char**)
 			ImGui::NewFrame();
 			if (currentDemo)
 			{
+				//glEnable(GL_DEPTH_TEST);
 				while (lag >= MS_PER_UPDATE)
 				{
 					currentDemo->Update(MS_PER_UPDATE);
@@ -119,6 +119,7 @@ int main(int, char**)
 				}
 				// Game Loop, Pattern used for decoupling -PC, -Robert Nystrom GPP
 				currentDemo->Render();
+				//glDisable(GL_DEPTH_TEST);
 				ImGui::Begin("TestBed Demos");
 				if (currentDemo != demoManager && ImGui::Button("<-"))
 				{
