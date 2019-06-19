@@ -298,7 +298,6 @@ TrammelDemo::TrammelDemo()
 	}
 }
 
-
 TrammelDemo::~TrammelDemo()
 {
 	// clean up Box2D draw
@@ -331,21 +330,15 @@ void TrammelDemo::Box2DStart()
 
 void TrammelDemo::Box2DEnd()
 {
-	m_world->~b2World();
+	delete m_world;
+	m_world = nullptr;
 }
 
 void TrammelDemo::Update(double interval)
 {
-
 	// Instruct the world to perform a single step of simulation.
 	// It is generally best to keep the time step and iterations fixed.
 	m_world->Step(interval, m_velocityIterations, m_positionIterations);
-
-	// Now print the position and angle of the body.
-	//b2Vec2 position = body->GetPosition();
-	//float32 angle = body->GetAngle();
-
-	//printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 }
 
 void TrammelDemo::Render()

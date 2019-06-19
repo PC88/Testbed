@@ -1,5 +1,5 @@
 #pragma once
-#include "Box2D/Box2D.h"
+#include "Demos\DemoSettings.h"
 class Demo
 {
 public:
@@ -11,5 +11,8 @@ public:
 	virtual void Render() {};
 	virtual void Box2DStart() {};
 	virtual void Box2DEnd() {};
+
+private:
+	Settings m_settings;
 };
 

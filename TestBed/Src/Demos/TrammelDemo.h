@@ -17,17 +17,17 @@ public:
 
 
 	b2Vec2 m_gravity;
-	b2World* m_world;
+	b2World* m_world = nullptr;
 	DebugDraw m_debugDraw;
 	uint32 m_flags;
 	uint32 m_velocityIterations; // usually 6
 	uint32 m_positionIterations; // usually 2
 
 	// static bodies -PC
-	b2Body* staticBodyBottomRight;
-	b2Body* staticBodyBottomLeft;
-	b2Body* staticBodyTopRight;
-	b2Body* staticBodyTopLeft;
+	b2Body* staticBodyBottomRight = nullptr;
+	b2Body* staticBodyBottomLeft = nullptr;
+	b2Body* staticBodyTopRight = nullptr;
+	b2Body* staticBodyTopLeft = nullptr;
 
 	// static bodies -PC
 	b2Body* bound1 = nullptr;
@@ -36,10 +36,10 @@ public:
 	b2Body* bound4 = nullptr;
 
 	// Dynamic bodies -PC
-	b2Body* m_sliderUD;
-	b2Body* m_sliderLR;
-	b2Body* rod;
-	b2Body* rodHandle;
+	b2Body* m_sliderUD = nullptr;
+	b2Body* m_sliderLR = nullptr;
+	b2Body* rod = nullptr;
+	b2Body* rodHandle = nullptr;
 
 	// joints: constraints - PC
 	b2RevoluteJoint* m_joint1 = nullptr;   // Shuttle/Slider pivot 1 -PC

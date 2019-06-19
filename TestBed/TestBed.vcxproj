@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Demos\BSTDemo.h" />
+    <ClInclude Include="Src\Demos\DemoSettings.h" />
     <ClInclude Include="Src\Demos\QuadTreeDemo.h" />
     <ClInclude Include="Src\BST\BSTNode.h" />
     <ClInclude Include="Src\Demos\Demo.h" />
