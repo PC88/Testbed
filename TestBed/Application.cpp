@@ -92,7 +92,6 @@ int main(int, char**)
 		LPTimer timer;
 		double previousTime = timer.getTime();
 		double lag = 0;
-
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
@@ -102,8 +101,8 @@ int main(int, char**)
 			previousTime = currentTime;
 			lag += elapsedTime;
 
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // cheap can be removed later -PC
-			glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(0.3f, 0.3f, 0.3f, 1.0f); // cheap can be removed later -PC
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				
 			// UI
 			ImGui_ImplOpenGL3_NewFrame();
@@ -117,7 +116,9 @@ int main(int, char**)
 					lag -= MS_PER_UPDATE;
 				}
 				// Game Loop, Pattern used for decoupling -PC, -Robert Nystrom GPP
+				glEnable(GL_DEPTH_TEST);
 				currentDemo->Render();
+				glDisable(GL_DEPTH_TEST);
 				ImGui::Begin("TestBed Demos");
 				if (currentDemo != demoManager && ImGui::Button("<-"))
 				{
