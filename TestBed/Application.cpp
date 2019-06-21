@@ -71,7 +71,7 @@ int main(int, char**)
 	{ // this scope exists to deal with the issue of GL`s error being infinite looped - TODO heap allocate so this dose not exist -PC
 
 
-		const double MS_PER_UPDATE = 0.018; // Nystrom Pattern: Game Loop
+		const double MS_PER_UPDATE = 0.008; // Nystrom Pattern: Game Loop
 
 
 		ImGui::CreateContext();

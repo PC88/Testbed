@@ -312,11 +312,10 @@ void TrammelDemo::Box2DStart()
 	m_world = new b2World(m_gravity);
 	m_world->SetDebugDraw(&m_debugDraw);
 	m_flags = 0;
-	m_flags += b2Draw::e_shapeBit;
-	m_flags += b2Draw::e_jointBit;
-	m_flags += b2Draw::e_aabbBit;
-	m_flags += b2Draw::e_pairBit;
-	m_flags += b2Draw::e_centerOfMassBit;
+	m_flags += m_settings.drawShapes * b2Draw::e_shapeBit;
+	m_flags += m_settings.drawJoints * b2Draw::e_jointBit;
+	m_flags += m_settings.drawAABBs  * b2Draw::e_aabbBit;
+	m_flags += m_settings.drawCOMs   * b2Draw::e_centerOfMassBit;
 	m_debugDraw.SetFlags(m_flags);
 	m_debugDraw.Create();
 
@@ -345,4 +344,9 @@ void TrammelDemo::Render()
 {
 	m_world->DrawDebugData();
 	m_debugDraw.Flush();
+}
+
+void TrammelDemo::Step(Settings * settings)
+{
+
 }

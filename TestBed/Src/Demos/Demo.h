@@ -6,13 +6,15 @@ public:
 	Demo();
 	virtual ~Demo();
 
-	virtual void ImGuiRender() {};
-	virtual void Update(double interval) {};
-	virtual void Render() {};
-	virtual void Box2DStart() {};
-	virtual void Box2DEnd() {};
+	// methods are not pure virtual as they are intended to be non-necessity.
 
-private:
-	Settings m_settings;
+	virtual void ImGuiRender() {};                  // Interface for rendering UI on each of the demos
+	virtual void Update(double interval) {};        // typical update method pattern.
+	virtual void Render() {};                       // Rendering call for non UI elements
+	virtual void Step(Settings* settings) {};       // this is a method emulated from B2D`s architecture serving to allow separate settings for each Demo 
+	virtual void Box2DStart() {};                   // deals with box2D construction on a per demo basis
+	virtual void Box2DEnd() {};                     // deals with destruction on a per demo basis
+
+	Settings m_settings;                            // the settings for each demo
 };
 

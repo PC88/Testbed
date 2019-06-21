@@ -14,6 +14,7 @@ public:
 	void Box2DEnd() override;
 	void Update(double interval) override;
 	void Render() override;
+	void Step(Settings* settings) override;
 
 
 	b2Vec2 m_gravity;
