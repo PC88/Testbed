@@ -17,12 +17,14 @@ public:
 	void Step(Settings* settings) override;
 
 
-	b2Vec2 m_gravity;
+	b2Vec2 m_gravity; // set to nothing as this is intended to simulate top-down
 	b2World* m_world = nullptr;
 	DebugDraw m_debugDraw;
 	uint32 m_flags;
 	uint32 m_velocityIterations; // usually 6
 	uint32 m_positionIterations; // usually 2
+
+	/// B2D elements used in demo ///
 
 	// static bodies -PC
 	b2Body* staticBodyBottomRight = nullptr;

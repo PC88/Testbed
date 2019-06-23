@@ -346,7 +346,7 @@ void TrammelDemo::Render()
 	m_debugDraw.Flush();
 }
 
-void TrammelDemo::Step(Settings * settings)
+void TrammelDemo::Step(Settings* settings)
 {
 
 }

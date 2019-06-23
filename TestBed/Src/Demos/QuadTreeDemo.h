@@ -22,5 +22,7 @@ public:
 	uint32 m_flags;
 	uint32 m_velocityIterations; // usually 6
 	uint32 m_positionIterations; // usually 2
+
+	/// B2D elements used in demo ///
 };
 
