@@ -9,6 +9,55 @@ BSTDemo::BSTDemo()
 	const b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
 	m_world->SetGravity(gravity);
 
+	// from TL to TR bounds measurements in B2D meters are Width = 80, Height = 45.
+	/// DEMO Boundaries ///
+	{
+		{ // top bound
+			b2PolygonShape shape;
+			shape.SetAsBox(m_width, 0.1f);
+
+			b2BodyDef bd;
+			bd.position.Set(0.0f, m_height); 
+			m_topBound = m_world->CreateBody(&bd);
+
+			m_topBound->CreateFixture(&shape, 1.0f);
+		}
+
+		{ // bottom bound
+			b2PolygonShape shape;
+			shape.SetAsBox(m_width, 0.1f);
+
+			b2BodyDef bd;
+			bd.position.Set(0.0f, -5.0f); 
+			m_bottomBound = m_world->CreateBody(&bd);
+
+			m_bottomBound->CreateFixture(&shape, 1.0f);
+		}
+
+		{ // left bound
+			b2PolygonShape shape;
+			shape.SetAsBox(0.1f, m_height);
+
+			b2BodyDef bd;
+			bd.position.Set(-(m_width/2), 0.0f); 
+			m_leftBound = m_world->CreateBody(&bd);
+
+			m_leftBound->CreateFixture(&shape, 1.0f);
+		}
+
+		{ // right bound
+			b2PolygonShape shape;
+			shape.SetAsBox(0.1f, m_height);
+
+			b2BodyDef bd;
+			bd.position.Set(m_width/2, 0.0f);
+			m_rightBound = m_world->CreateBody(&bd);
+
+			m_rightBound->CreateFixture(&shape, 1.0f);
+		}
+	}
+	/// DEMO Boundaries ///
+
 	/// DEFINE DYNAMIC BODIES ///
 	// define the elements that will be in the tree
 	{

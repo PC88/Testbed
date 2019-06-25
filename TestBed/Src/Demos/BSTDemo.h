@@ -32,8 +32,18 @@ public:
 	uint32 m_velocityIterations; // usually 6
 	uint32 m_positionIterations; // usually 2
 
+	// these are box2D meters
+	const float m_width = 80.0f;
+	const float m_height = 45.0f;
+
 	// TODO: create measurements, of how to space out gates, and bridges.
 
+	// test measure
+	b2Body* m_topBound; // top
+	b2Body* m_bottomBound; // bottom
+	b2Body* m_leftBound; // left
+	b2Body* m_rightBound; // right
+	// test measure
 
 	/// B2D elements used in demo ///
 
