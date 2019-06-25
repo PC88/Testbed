@@ -17,7 +17,7 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(m_width, 0.1f);
 
 			b2BodyDef bd;
-			bd.position.Set(0.0f, m_height); 
+			bd.position.Set(0.0f, m_height);
 			m_topBound = m_world->CreateBody(&bd);
 
 			m_topBound->CreateFixture(&shape, 1.0f);
@@ -28,7 +28,7 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(m_width, 0.1f);
 
 			b2BodyDef bd;
-			bd.position.Set(0.0f, -5.0f); 
+			bd.position.Set(0.0f, -5.0f);
 			m_bottomBound = m_world->CreateBody(&bd);
 
 			m_bottomBound->CreateFixture(&shape, 1.0f);
@@ -39,7 +39,7 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(0.1f, m_height);
 
 			b2BodyDef bd;
-			bd.position.Set(-(m_width/2), 0.0f); 
+			bd.position.Set(-(m_width / 2), 0.0f);
 			m_leftBound = m_world->CreateBody(&bd);
 
 			m_leftBound->CreateFixture(&shape, 1.0f);
@@ -50,7 +50,7 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(0.1f, m_height);
 
 			b2BodyDef bd;
-			bd.position.Set(m_width/2, 0.0f);
+			bd.position.Set(m_width / 2, 0.0f);
 			m_rightBound = m_world->CreateBody(&bd);
 
 			m_rightBound->CreateFixture(&shape, 1.0f);
@@ -68,7 +68,7 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
-			bd.position.Set(-30.0f, 27.0f);
+			bd.position.Set(-m_width / (i + 1), 35.0f);
 
 			m_elements[i] = m_world->CreateBody(&bd);
 
@@ -87,7 +87,7 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
-			bd.position.Set(-5.0f, 22.0f);
+			bd.position.Set(float((i * i) / m_width), m_height / (i + 1));
 
 			m_elementGates[i] = m_world->CreateBody(&bd);
 
@@ -111,6 +111,18 @@ BSTDemo::BSTDemo()
 			m_elementBridges[i] = m_world->CreateBody(&bd);
 
 			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
+		}
+		{
+			b2EdgeShape shape;
+			shape.Set(b2Vec2(-(m_width/6) - m_width/6, m_height - 10.0f), b2Vec2(m_width/6 - m_width / 6, m_height - 15.0f));
+
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			bd.position.Set(0.0f, 10.0f);
+
+			m_InclineLoader= m_world->CreateBody(&bd);
+
+			m_InclineLoader->CreateFixture(&shape, 1.0f);
 		}
 	}
 	/// DEFINE STATIC BODIES ///
