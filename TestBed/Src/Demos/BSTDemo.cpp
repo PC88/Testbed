@@ -59,8 +59,8 @@ BSTDemo::BSTDemo()
 	/// DEMO Boundaries ///
 
 	/// DEFINE DYNAMIC BODIES ///
-	// define the elements that will be in the tree
 	{
+		// define the elements that will be in the tree
 		for (int32 i = 0; i < e_BSTDemoElements; ++i)
 		{
 			b2PolygonShape shape;
@@ -76,10 +76,8 @@ BSTDemo::BSTDemo()
 
 			//m_elements[i]->SetLinearVelocity(b2Vec2(0.0f, -50.0f));
 		}
-	}
 
-	// define the dynamic gates which hold objects
-	{
+		// define the dynamic gates which hold objects
 		for (int32 i = 0; i < e_BSTDemoElementGateJoints; ++i)
 		{
 			b2PolygonShape shape;
@@ -106,7 +104,23 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
-			bd.position.Set(0.0f, 10.0f);
+			if ((m_width * i) / 8 != 0)
+			{
+				// (((m_width * i)/8)/2)
+				int calc = (int((m_width * i) / 8) % 2);
+				if (  calc == 0   )
+				{
+					bd.position.Set(-((m_width * i) / 8), -(m_height * i) / 8);
+				} 
+				else
+				{
+					bd.position.Set((m_width * i) / 8, -(m_height * i) / 8);
+				}
+			}
+			else
+			{
+				bd.position.Set((m_width * i) / 8, (m_height * i) / 8);
+			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
 
