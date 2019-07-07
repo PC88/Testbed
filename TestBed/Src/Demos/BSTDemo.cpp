@@ -84,8 +84,24 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(3.5f, 0.5f);
 
 			b2BodyDef bd;
-			bd.type = b2_dynamicBody;
-			bd.position.Set(float((i * i) / m_width), m_height / (i + 1));
+			//bd.type = b2_dynamicBody;
+			if ((m_width * i) / 16 != 0)
+			{
+				// (((m_width * i)/8)/2)
+				int calc = (int((m_width * i) / 8) % 2); // ISSUE lies here, modulo resulting in uneven distribution.
+				if (calc == 0)
+				{
+					bd.position.Set(-((m_width * i) / 16), (m_height * i) / 16);
+				}
+				else
+				{
+					bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
+				}
+			}
+			else
+			{
+				bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
+			}
 
 			m_elementGates[i] = m_world->CreateBody(&bd);
 
@@ -104,28 +120,30 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
-			if ((m_width * i) / 8 != 0)
+			if ((m_width * i) / 16 != 0)
 			{
 				// (((m_width * i)/8)/2)
-				int calc = (int((m_width * i) / 8) % 2);
-				if (  calc == 0   )
+				int calc = (int((m_width * i) / 8) % 2);// ISSUE lies here, modulo resulting in uneven distribution.
+				if (calc == 0)
 				{
-					bd.position.Set(-((m_width * i) / 8), -(m_height * i) / 8);
+					bd.position.Set(-((m_width * i) / 16), -(m_height * i) / 16);
 				} 
 				else
 				{
-					bd.position.Set((m_width * i) / 8, -(m_height * i) / 8);
+					bd.position.Set((m_width * i) / 16, -(m_height * i) / 16);
 				}
 			}
 			else
 			{
-				bd.position.Set((m_width * i) / 8, (m_height * i) / 8);
+				bd.position.Set((m_width * i) / 8, (m_height * i) / 16);
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
 
 			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
 		}
+
+		// the inclined loader
 		{
 			b2EdgeShape shape;
 			shape.Set(b2Vec2(-(m_width/6) - m_width/6, m_height - 10.0f), b2Vec2(m_width/6 - m_width / 6, m_height - 15.0f));
@@ -134,7 +152,7 @@ BSTDemo::BSTDemo()
 			bd.type = b2_staticBody;
 			bd.position.Set(0.0f, 10.0f);
 
-			m_InclineLoader= m_world->CreateBody(&bd);
+			m_InclineLoader = m_world->CreateBody(&bd);
 
 			m_InclineLoader->CreateFixture(&shape, 1.0f);
 		}

@@ -35,6 +35,9 @@ public:
 	// these are box2D meters
 	const float m_width = 80.0f;
 	const float m_height = 45.0f;
+	// off set for bridges
+	const float m_leftOffset = 10.0f;
+	const float m_rightOffset = 10.0f;
 
 	// depth of tree
 	const int m_BSTdepth = 4;
