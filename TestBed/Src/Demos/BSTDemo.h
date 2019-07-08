@@ -10,7 +10,7 @@ public:
 	BSTDemo();
 	virtual ~BSTDemo();
 
-	static const uint32 m_elementCount = 15; // number of elements in BST
+	static const uint32 m_elementCount = 9; // number of elements in BST
 
 	enum
 	{
@@ -35,9 +35,11 @@ public:
 	// these are box2D meters
 	const float m_width = 80.0f;
 	const float m_height = 45.0f;
-	// off set for bridges
+	// offset for bridges
 	const float m_leftOffset = 10.0f;
 	const float m_rightOffset = 10.0f;
+	// offset for Gates
+	const float m_GateOffset = 35.0f;
 
 	// depth of tree
 	const int m_BSTdepth = 4;

@@ -81,26 +81,39 @@ BSTDemo::BSTDemo()
 		for (int32 i = 0; i < e_BSTDemoElementGateJoints; ++i)
 		{
 			b2PolygonShape shape;
-			shape.SetAsBox(3.5f, 0.5f);
+			shape.SetAsBox(2.5f, 0.25f);
 
 			b2BodyDef bd;
 			//bd.type = b2_dynamicBody;
-			if ((m_width * i) / 16 != 0)
+
+			int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
+				// if it is not 0, its not the first element in the graph:
+				// place it either left or right side distribution.
 				// (((m_width * i)/8)/2)
-				int calc = (int((m_width * i) / 8) % 2); // ISSUE lies here, modulo resulting in uneven distribution.
-				if (calc == 0)
+				int calc = (i % 2);
+
+				// this deals with even Y co-ordinate distribution
+				static int counter = 0;
+				counter++;
+				if (counter % 2 == 0)
 				{
-					bd.position.Set(-((m_width * i) / 16), (m_height * i) / 16);
+					yOffsetMultiplier++;
+				}
+
+				if (calc == 0)
+				{ // if even: no remainder --> left side distribution
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), (-(m_height * yOffsetMultiplier) / 16) + m_GateOffset);
 				}
 				else
-				{
-					bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
+				{ // if odd: there is a remainder --> right side distribution
+					bd.position.Set((m_width * i) / 16, (-(m_height * i) / 16 + m_GateOffset));
 				}
 			}
-			else
+			else // if it is 0, then it is the first gate, place it at the top of graph.
 			{
-				bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
+				bd.position.Set((m_width * i) / 16, ((m_height * i) / 16 + m_GateOffset));
 			}
 
 			m_elementGates[i] = m_world->CreateBody(&bd);
@@ -120,10 +133,10 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
-			if ((m_width * i) / 16 != 0)
+			if ((m_width * i) != 0)
 			{
-				// (((m_width * i)/8)/2)
-				int calc = (int((m_width * i) / 8) % 2);// ISSUE lies here, modulo resulting in uneven distribution.
+				// (((m_width * i)/8)%2) tells us even/odd.
+				int calc = (i % 2);
 				if (calc == 0)
 				{
 					bd.position.Set(-((m_width * i) / 16), -(m_height * i) / 16);
