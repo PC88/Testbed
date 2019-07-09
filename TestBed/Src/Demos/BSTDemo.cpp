@@ -9,6 +9,8 @@ BSTDemo::BSTDemo()
 	const b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
 	m_world->SetGravity(gravity);
 
+	
+
 	// from TL to TR bounds measurements in B2D meters are Width = 80, Height = 45.
 	/// DEMO Boundaries ///
 	{
@@ -60,6 +62,10 @@ BSTDemo::BSTDemo()
 
 	/// DEFINE DYNAMIC BODIES ///
 	{
+		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
+		int counter = 0;
+		int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+
 		// define the elements that will be in the tree
 		for (int32 i = 0; i < e_BSTDemoElements; ++i)
 		{
@@ -86,7 +92,6 @@ BSTDemo::BSTDemo()
 			b2BodyDef bd;
 			//bd.type = b2_dynamicBody;
 
-			int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
 			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
 				// if it is not 0, its not the first element in the graph:
@@ -95,11 +100,10 @@ BSTDemo::BSTDemo()
 				int calc = (i % 2);
 
 				// this deals with even Y co-ordinate distribution
-				static int counter = 0;
 				counter++;
-				if (counter % 2 == 0)
+				if (counter % 2 != 0)
 				{
-					yOffsetMultiplier++;
+					yOffsetMultiplier += 2;
 				}
 
 				if (calc == 0)
@@ -108,7 +112,7 @@ BSTDemo::BSTDemo()
 				}
 				else
 				{ // if odd: there is a remainder --> right side distribution
-					bd.position.Set((m_width * i) / 16, (-(m_height * i) / 16 + m_GateOffset));
+					bd.position.Set((m_width * yOffsetMultiplier) / 16, (-(m_height * yOffsetMultiplier) / 16 + m_GateOffset));
 				}
 			}
 			else // if it is 0, then it is the first gate, place it at the top of graph.
@@ -126,6 +130,10 @@ BSTDemo::BSTDemo()
 	/// DEFINE STATIC BODIES ///
 	// define the static bridges which visualize the references to sub-nodes
 	{
+		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
+		int counter = 0;
+		int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+
 		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
 		{
 			b2EdgeShape shape;
@@ -133,22 +141,49 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
-			if ((m_width * i) != 0)
+			//if ((m_width * i) != 0)
+			//{
+			//	// (((m_width * i)/8)%2) tells us even/odd.
+			//	int calc = (i % 2);
+			//	if (calc == 0)
+			//	{
+			//		bd.position.Set(-((m_width * i) / 16), -(m_height * i) / 16);
+			//	} 
+			//	else
+			//	{
+			//		bd.position.Set((m_width * i) / 16, -(m_height * i) / 16);
+			//	}
+			//}
+			//else
+			//{
+			//	bd.position.Set((m_width * i) / 8, (m_height * i) / 16);
+			//}
+			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
-				// (((m_width * i)/8)%2) tells us even/odd.
+				// if it is not 0, its not the first element in the graph:
+				// place it either left or right side distribution.
+				// (((m_width * i)/8)/2)
 				int calc = (i % 2);
+
+				// this deals with even Y co-ordinate distribution
+				counter++;
+				if (counter % 2 != 0)
+				{
+					yOffsetMultiplier += 2;
+				}
+
 				if (calc == 0)
-				{
-					bd.position.Set(-((m_width * i) / 16), -(m_height * i) / 16);
-				} 
+				{ // if even: no remainder --> left side distribution
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), (-(m_height * yOffsetMultiplier) / 16) + m_GateOffset);
+				}
 				else
-				{
-					bd.position.Set((m_width * i) / 16, -(m_height * i) / 16);
+				{ // if odd: there is a remainder --> right side distribution
+					bd.position.Set((m_width * yOffsetMultiplier) / 16, (-(m_height * yOffsetMultiplier) / 16 + m_GateOffset));
 				}
 			}
-			else
+			else // if it is 0, then it is the first gate, place it at the top of graph.
 			{
-				bd.position.Set((m_width * i) / 8, (m_height * i) / 16);
+				bd.position.Set((m_width * i) / 16, ((m_height * i) / 16 + m_GateOffset));
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);

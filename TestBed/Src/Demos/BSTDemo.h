@@ -10,7 +10,7 @@ public:
 	BSTDemo();
 	virtual ~BSTDemo();
 
-	static const uint32 m_elementCount = 9; // number of elements in BST
+	static const uint32 m_elementCount = 7; // number of elements in BST
 
 	enum
 	{
