@@ -141,29 +141,8 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
-			//if ((m_width * i) != 0)
-			//{
-			//	// (((m_width * i)/8)%2) tells us even/odd.
-			//	int calc = (i % 2);
-			//	if (calc == 0)
-			//	{
-			//		bd.position.Set(-((m_width * i) / 16), -(m_height * i) / 16);
-			//	} 
-			//	else
-			//	{
-			//		bd.position.Set((m_width * i) / 16, -(m_height * i) / 16);
-			//	}
-			//}
-			//else
-			//{
-			//	bd.position.Set((m_width * i) / 8, (m_height * i) / 16);
-			//}
-			if ((m_width * i) != 0) // if it is not 0: the first element, continue
+			if ((m_width * i) != 0)
 			{
-				// if it is not 0, its not the first element in the graph:
-				// place it either left or right side distribution.
-				// (((m_width * i)/8)/2)
-				int calc = (i % 2);
 
 				// this deals with even Y co-ordinate distribution
 				counter++;
@@ -172,18 +151,20 @@ BSTDemo::BSTDemo()
 					yOffsetMultiplier += 2;
 				}
 
+				// (((m_width * i)/8)%2) tells us even/odd.
+				int calc = (i % 2);
 				if (calc == 0)
-				{ // if even: no remainder --> left side distribution
-					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), (-(m_height * yOffsetMultiplier) / 16) + m_GateOffset);
-				}
+				{
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16);
+				} 
 				else
-				{ // if odd: there is a remainder --> right side distribution
-					bd.position.Set((m_width * yOffsetMultiplier) / 16, (-(m_height * yOffsetMultiplier) / 16 + m_GateOffset));
+				{
+					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16);
 				}
 			}
-			else // if it is 0, then it is the first gate, place it at the top of graph.
+			else
 			{
-				bd.position.Set((m_width * i) / 16, ((m_height * i) / 16 + m_GateOffset));
+				bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
