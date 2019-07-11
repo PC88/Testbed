@@ -40,7 +40,8 @@ public:
 	const float m_rightOffset = 10.0f;
 	// offset for Gates
 	const float m_GateOffset = 35.0f;
-
+	// offset for containers, they represent what the Nodes in a BST store.
+	const float m_ContainerOffset = 10.0f;
 	// depth of tree
 	const int m_BSTdepth = 4;
 

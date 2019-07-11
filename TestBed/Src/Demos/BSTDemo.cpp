@@ -155,16 +155,16 @@ BSTDemo::BSTDemo()
 				int calc = (i % 2);
 				if (calc == 0)
 				{
-					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16);
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
 				} 
 				else
 				{
-					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16);
+					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
 				}
 			}
 			else
 			{
-				bd.position.Set((m_width * i) / 16, (m_height * i) / 16);
+				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
