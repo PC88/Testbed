@@ -83,7 +83,7 @@ BSTDemo::BSTDemo()
 			//m_elements[i]->SetLinearVelocity(b2Vec2(0.0f, -50.0f));
 		}
 
-		// define the dynamic gates which hold objects
+		// define the dynamic gates which allow the force to place the object objects
 		for (int32 i = 0; i < e_BSTDemoElementGateJoints; ++i)
 		{
 			b2PolygonShape shape;
@@ -169,6 +169,60 @@ BSTDemo::BSTDemo()
 				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
 				bd.angle = 0.5f;
 				bd.angle = -0.5f;
+			}
+
+			m_elementBridges[i] = m_world->CreateBody(&bd);
+
+			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
+		}
+
+
+
+		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
+		//int Scounter = 0;
+		//int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+
+		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
+		{
+
+			b2Vec2 nodeShape[4];
+			nodeShape[0].Set(0.0f, 11.7f);
+			nodeShape[1].Set(0.5f, 0.0f);
+			nodeShape[2].Set(11.5f, 0.0f);
+			nodeShape[3].Set(11.5f, 11.7f);
+			b2ChainShape shape;
+			shape.CreateChain(nodeShape, 4);
+
+
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			if ((m_width * i) != 0)
+			{
+
+				// this deals with even Y co-ordinate distribution
+				counter++;
+				if (counter % 2 != 0)
+				{
+					yOffsetMultiplier += 2;
+				}
+
+				// (((m_width * i)/8)%2) tells us even/odd.
+				int calc = (i % 2);
+				if (calc == 0)
+				{
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
+					bd.angle = 0.8f;
+				}
+				else
+				{
+					bd.position.Set(0.0f, 5.0f);
+					bd.angle = -0.8f;
+				}
+			}
+			else
+			{
+				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
+				bd.angle = -0.8f;
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
