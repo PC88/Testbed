@@ -11,12 +11,14 @@ public:
 	virtual ~BSTDemo();
 
 	static const uint32 m_elementCount = 7; // number of elements in BST
+	static const uint32 m_elementContainers = 21; // number of edges needed to form a container, to represent a Node.
 
 	enum
 	{
 		e_BSTDemoElements = m_elementCount,
 		e_BSTDemoElementBridges = m_elementCount,
-		e_BSTDemoElementGateJoints = m_elementCount
+		e_BSTDemoElementGateJoints = m_elementCount,
+		e_BSTDemoElementContainers = m_elementContainers
 	};
 
 	void Box2DStart() override;
@@ -42,6 +44,10 @@ public:
 	const float m_GateOffset = 35.0f;
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerOffset = 10.0f;
+	// offsets for edge shapes to form containers.
+	const float m_ConEdgeOffsetLeft = -5.0f;
+	const float m_ConEdgeOffsetRight = 5.0f;
+	const float m_ConEdgeOffsetCentre = 10.0f;
 	// depth of tree
 	const int m_BSTdepth = 4;
 

@@ -69,8 +69,8 @@ BSTDemo::BSTDemo()
 		// define the elements that will be in the tree
 		for (int32 i = 0; i < e_BSTDemoElements; ++i)
 		{
-			b2PolygonShape shape;
-			shape.SetAsBox(1.5f, 1.5f);
+			b2CircleShape shape;
+			shape.m_radius = 1.0f;
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
@@ -90,7 +90,7 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(2.5f, 0.25f);
 
 			b2BodyDef bd;
-			//bd.type = b2_dynamicBody;
+			bd.type = b2_dynamicBody;
 
 			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
@@ -156,7 +156,71 @@ BSTDemo::BSTDemo()
 				if (calc == 0)
 				{
 					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
+					bd.angle = 0.5f;
 				} 
+				else
+				{
+					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
+					bd.angle = -0.5f;
+				}
+			}
+			else
+			{
+				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
+				bd.angle = 0.5f;
+				bd.angle = -0.5f;
+			}
+
+			m_elementBridges[i] = m_world->CreateBody(&bd);
+
+			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
+		}
+
+		// the inclined loader: just a plain the weighted bals run off of, into the Graph
+		{
+			b2EdgeShape shape;
+			shape.Set(b2Vec2(-(m_width/6) - m_width/6, m_height - 10.0f), b2Vec2(m_width/6 - m_width / 6, m_height - 15.0f));
+
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			bd.position.Set(0.0f, 10.0f);
+
+			m_InclineLoader = m_world->CreateBody(&bd);
+
+			m_InclineLoader->CreateFixture(&shape, 1.0f);
+		}
+	}
+
+
+	// define the static containers used to hold the values, within the nodes.
+	{
+		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
+		int counter = 0;
+		int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+
+		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
+		{
+			b2EdgeShape shape;
+			shape.Set(b2Vec2(-5.0f, 22.0f), b2Vec2(5.0f, 22.0f));
+
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			if ((m_width * i) != 0)
+			{
+
+				// this deals with even Y co-ordinate distribution
+				counter++;
+				if (counter % 2 != 0)
+				{
+					yOffsetMultiplier += 2;
+				}
+
+				// (((m_width * i)/8)%2) tells us even/odd.
+				int calc = (i % 2);
+				if (calc == 0)
+				{
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
+				}
 				else
 				{
 					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
@@ -175,7 +239,7 @@ BSTDemo::BSTDemo()
 		// the inclined loader
 		{
 			b2EdgeShape shape;
-			shape.Set(b2Vec2(-(m_width/6) - m_width/6, m_height - 10.0f), b2Vec2(m_width/6 - m_width / 6, m_height - 15.0f));
+			shape.Set(b2Vec2(-(m_width / 6) - m_width / 6, m_height - 10.0f), b2Vec2(m_width / 6 - m_width / 6, m_height - 15.0f));
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
