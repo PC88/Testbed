@@ -38,8 +38,7 @@ public:
 	const float m_width = 80.0f;
 	const float m_height = 45.0f;
 	// offset for bridges
-	const float m_leftOffset = 10.0f;
-	const float m_rightOffset = 10.0f;
+	const float m_BridgeOffset = 10.0f;
 	// offset for Gates
 	const float m_GateOffset = 35.0f;
 	// offset for containers, they represent what the Nodes in a BST store.
