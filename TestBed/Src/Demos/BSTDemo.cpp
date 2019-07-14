@@ -156,19 +156,15 @@ BSTDemo::BSTDemo()
 				if (calc == 0)
 				{
 					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
-					bd.angle = 0.5f;
 				} 
 				else
 				{
 					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
-					bd.angle = -0.5f;
 				}
 			}
 			else
 			{
 				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
-				bd.angle = 0.5f;
-				bd.angle = -0.5f;
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
@@ -211,18 +207,15 @@ BSTDemo::BSTDemo()
 				if (calc == 0)
 				{
 					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
-					bd.angle = 0.8f;
 				}
 				else
 				{
 					bd.position.Set(0.0f, 5.0f);
-					bd.angle = -0.8f;
 				}
 			}
 			else
 			{
 				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
-				bd.angle = -0.8f;
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
