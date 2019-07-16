@@ -79,8 +79,6 @@ BSTDemo::BSTDemo()
 			m_elements[i] = m_world->CreateBody(&bd);
 
 			m_elements[i]->CreateFixture(&shape, 1.0f);
-
-			//m_elements[i]->SetLinearVelocity(b2Vec2(0.0f, -50.0f));
 		}
 
 		// define the dynamic gates which allow the force to place the object objects
@@ -236,66 +234,18 @@ BSTDemo::BSTDemo()
 
 			m_InclineLoader->CreateFixture(&shape, 1.0f);
 		}
-	}
-
-
-	// define the static containers used to hold the values, within the nodes.
+	}// the inclined loader
 	{
-		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
-		int counter = 0;
-		int yOffsetMultiplier = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+		b2EdgeShape shape;
+		shape.Set(b2Vec2(-(m_width / 6) - m_width / 6, m_height - 10.0f), b2Vec2(m_width / 6 - m_width / 6, m_height - 15.0f));
 
-		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
-		{
-			b2EdgeShape shape;
-			shape.Set(b2Vec2(-5.0f, 22.0f), b2Vec2(5.0f, 22.0f));
+		b2BodyDef bd;
+		bd.type = b2_staticBody;
+		bd.position.Set(0.0f, 10.0f);
 
-			b2BodyDef bd;
-			bd.type = b2_staticBody;
-			if ((m_width * i) != 0)
-			{
+		m_InclineLoader = m_world->CreateBody(&bd);
 
-				// this deals with even Y co-ordinate distribution
-				counter++;
-				if (counter % 2 != 0)
-				{
-					yOffsetMultiplier += 2;
-				}
-
-				// (((m_width * i)/8)%2) tells us even/odd.
-				int calc = (i % 2);
-				if (calc == 0)
-				{
-					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
-				}
-				else
-				{
-					bd.position.Set((m_width * yOffsetMultiplier) / 16, -(m_height * yOffsetMultiplier) / 16 + m_ContainerOffset);
-				}
-			}
-			else
-			{
-				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
-			}
-
-			m_elementBridges[i] = m_world->CreateBody(&bd);
-
-			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
-		}
-
-		// the inclined loader
-		{
-			b2EdgeShape shape;
-			shape.Set(b2Vec2(-(m_width / 6) - m_width / 6, m_height - 10.0f), b2Vec2(m_width / 6 - m_width / 6, m_height - 15.0f));
-
-			b2BodyDef bd;
-			bd.type = b2_staticBody;
-			bd.position.Set(0.0f, 10.0f);
-
-			m_InclineLoader = m_world->CreateBody(&bd);
-
-			m_InclineLoader->CreateFixture(&shape, 1.0f);
-		}
+		m_InclineLoader->CreateFixture(&shape, 1.0f);
 	}
 	/// DEFINE STATIC BODIES ///
 }
