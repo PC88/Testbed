@@ -171,19 +171,19 @@ BSTDemo::BSTDemo()
 		}
 
 
-
+		// Containers to represent the nodes then selfs.
 		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
 		int Counter = 0;
 		int YOffsetMultiplier = 0; // will be in respective increments, for each y co-ordinate change, except first
 
-		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
+		for (int32 i = 0; i < e_BSTDemoElementContainers; ++i)
 		{
 
 			b2Vec2 nodeShape[4];
 			nodeShape[0].Set(0.0f, 5.0f);
 			nodeShape[1].Set(0.5f, 0.0f);
-			nodeShape[2].Set(10.5f, 0.0f);
-			nodeShape[3].Set(11.0f, 5.0f);
+			nodeShape[2].Set(4.5f, 0.0f);
+			nodeShape[3].Set(5.0f, 5.0f);
 			b2ChainShape shape;
 			shape.CreateChain(nodeShape, 4);
 
@@ -204,16 +204,16 @@ BSTDemo::BSTDemo()
 				int calc = (i % 2);
 				if (calc == 0)
 				{
-					bd.position.Set(-((m_width * YOffsetMultiplier) / 16), -(m_height * YOffsetMultiplier) / 16 + m_ContainerOffset);
+					bd.position.Set(-((m_width * YOffsetMultiplier) / 16) - m_ContainerXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerYOffset);
 				}
 				else
 				{
-					bd.position.Set((m_width * YOffsetMultiplier) / 16, -(m_height * YOffsetMultiplier) / 16 + m_ContainerOffset);
+					bd.position.Set((m_width * YOffsetMultiplier) / 16 - m_ContainerXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerYOffset);
 				}
 			}
 			else
 			{
-				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_ContainerOffset);
+				bd.position.Set((m_width * i) / 16 - m_ContainerXOffset, (m_height * i) / 16 + m_ContainerYOffset);
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);

@@ -10,14 +10,20 @@ public:
 	BSTDemo();
 	virtual ~BSTDemo();
 
-	static const uint32 m_elementCount = 7; // number of elements in BST
-	static const uint32 m_elementContainers = 21; // number of edges needed to form a container, to represent a Node.
+	// depth of tree
+	// this means 7 nodes, 6 references. 
+	// Visually that is 7 containers 6 Bridges
+	static const int m_BSTdepth = 3; 
+
+	static const uint32 m_elementCount = 8; // number of elements in BST, one over number of nodes to show insertions and deletions.
+	static const uint32 m_elementContainers = 7; // number of edges needed to form a container, to represent a Node.
+	static const uint32 m_elementReferences = m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
 
 	enum
 	{
 		e_BSTDemoElements = m_elementCount,
-		e_BSTDemoElementBridges = m_elementCount,
-		e_BSTDemoElementGateJoints = m_elementCount,
+		e_BSTDemoElementBridges = m_elementReferences,
+		e_BSTDemoElementGateJoints = m_elementContainers, // one joint per container
 		e_BSTDemoElementContainers = m_elementContainers
 	};
 
@@ -42,13 +48,8 @@ public:
 	// offset for Gates
 	const float m_GateOffset = 35.0f;
 	// offset for containers, they represent what the Nodes in a BST store.
-	const float m_ContainerOffset = 10.0f;
-	// offsets for edge shapes to form containers.
-	const float m_ConEdgeOffsetLeft = -5.0f;
-	const float m_ConEdgeOffsetRight = 5.0f;
-	const float m_ConEdgeOffsetCentre = 10.0f;
-	// depth of tree
-	const int m_BSTdepth = 4;
+	const float m_ContainerXOffset = 2.5f;
+	const float m_ContainerYOffset = 20.0f;
 
 
 	// test measure
