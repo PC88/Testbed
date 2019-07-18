@@ -106,16 +106,16 @@ BSTDemo::BSTDemo()
 
 				if (calc == 0)
 				{ // if even: no remainder --> left side distribution
-					bd.position.Set(-((m_width * yOffsetMultiplier) / 16), (-(m_height * yOffsetMultiplier) / 16) + m_GateOffset);
+					bd.position.Set(-((m_width * yOffsetMultiplier) / 16) - m_GateXOffset, (-(m_height * yOffsetMultiplier) / 16) + m_GateYOffset);
 				}
 				else
 				{ // if odd: there is a remainder --> right side distribution
-					bd.position.Set((m_width * yOffsetMultiplier) / 16, (-(m_height * yOffsetMultiplier) / 16 + m_GateOffset));
+					bd.position.Set((m_width * yOffsetMultiplier) / 16 - m_GateXOffset, (-(m_height * yOffsetMultiplier) / 16 + m_GateYOffset));
 				}
 			}
 			else // if it is 0, then it is the first gate, place it at the top of graph.
 			{
-				bd.position.Set((m_width * i) / 16, ((m_height * i) / 16 + m_GateOffset));
+				bd.position.Set((m_width * i) / 16 - m_GateXOffset, ((m_height * i) / 16 + m_GateYOffset));
 			}
 
 			m_elementGates[i] = m_world->CreateBody(&bd);
@@ -187,7 +187,6 @@ BSTDemo::BSTDemo()
 			b2ChainShape shape;
 			shape.CreateChain(nodeShape, 4);
 
-
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
 			if ((m_width * i) != 0)
@@ -251,12 +250,13 @@ BSTDemo::BSTDemo()
 
 	/// DEFINE THE JOINTS WHICH CONNECT BODIES ///
 	{
-		/*	for (int i = 0; i < e_BSTDemoElementGateJoints; ++i)
-			{
-				b2RevoluteJointDef rdj;
-
-				rdj.Initialize(, );
-			}*/
+		for (int i = 0; i < e_BSTDemoElementGateJoints; ++i)
+		{
+			b2RevoluteJointDef rdj;
+			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x + 5.0f, m_elementContainers[i]->GetWorldCenter().y + 5.0f));
+			//rdj.localAnchorA.x += 2.5f;
+			m_elementBridgeJoints[i] = (b2RevoluteJoint*)m_world->CreateJoint(&rdj);
+		}
 	}
 	/// DEFINE THE JOINTS WHICH CONNECT BODIES ///
 }
