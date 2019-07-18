@@ -3,6 +3,7 @@
 #include "Box2D\Box2D.h"
 #include "Box2D\Common\DebugDraw.h"
 
+
 class BSTDemo :
 	public Demo
 {
@@ -16,16 +17,18 @@ public:
 	static const int m_BSTdepth = 3; 
 
 	static const uint32 m_elementCount = 8; // number of elements in BST, one over number of nodes to show insertions and deletions.
-	static const uint32 m_elementContainers = 7; // number of edges needed to form a container, to represent a Node.
+	static const uint32 m_elementContainerCount = 7; // number of edges needed to form a container, to represent a Node.
 	static const uint32 m_elementReferences = m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
 
 	enum
 	{
 		e_BSTDemoElements = m_elementCount,
 		e_BSTDemoElementBridges = m_elementReferences,
-		e_BSTDemoElementGateJoints = m_elementContainers, // one joint per container
-		e_BSTDemoElementContainers = m_elementContainers
+		e_BSTDemoElementGateJoints = m_elementContainerCount, // one joint per container
+		e_BSTDemoElementContainers = m_elementContainerCount
 	};
+
+	
 
 	void Box2DStart() override;
 	void Box2DEnd() override;
@@ -69,6 +72,7 @@ public:
 
 	// Static bodies -PC
 	b2Body* m_elementBridges[e_BSTDemoElementBridges]; // static connecting bodies
+	b2Body* m_elementContainers[e_BSTDemoElementContainers]; // the containers representing Nodes
 
 	// Joints -PC
 	b2RevoluteJoint* m_elementBridgeJoints[e_BSTDemoElementGateJoints]; // joints for the gates

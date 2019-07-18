@@ -216,9 +216,9 @@ BSTDemo::BSTDemo()
 				bd.position.Set((m_width * i) / 16 - m_ContainerXOffset, (m_height * i) / 16 + m_ContainerYOffset);
 			}
 
-			m_elementBridges[i] = m_world->CreateBody(&bd);
+			m_elementContainers[i] = m_world->CreateBody(&bd);
 
-			m_elementBridges[i]->CreateFixture(&shape, 1.0f);
+			m_elementContainers[i]->CreateFixture(&shape, 1.0f);
 		}
 
 		// the inclined loader: just a plain the weighted bals run off of, into the Graph
@@ -248,6 +248,17 @@ BSTDemo::BSTDemo()
 		m_InclineLoader->CreateFixture(&shape, 1.0f);
 	}
 	/// DEFINE STATIC BODIES ///
+
+	/// DEFINE THE JOINTS WHICH CONNECT BODIES ///
+	{
+		/*	for (int i = 0; i < e_BSTDemoElementGateJoints; ++i)
+			{
+				b2RevoluteJointDef rdj;
+
+				rdj.Initialize(, );
+			}*/
+	}
+	/// DEFINE THE JOINTS WHICH CONNECT BODIES ///
 }
 
 BSTDemo::~BSTDemo()
