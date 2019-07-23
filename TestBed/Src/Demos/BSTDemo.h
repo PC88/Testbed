@@ -49,7 +49,7 @@ public:
 	// offset for bridges
 	const float m_BridgeOffset = 10.0f;
 	// offset for Gates
-	const float m_GateXOffset = -2.5f; // worked out via chain positions
+	const float m_GateXOffset = 0.0f; // worked out via chain positions
 	const float m_GateYOffset = 25.0f; // worked out via chain positions
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerXOffset = 2.5f;

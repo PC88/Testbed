@@ -254,7 +254,15 @@ BSTDemo::BSTDemo()
 		{
 			b2RevoluteJointDef rdj;
 			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x + 5.0f, m_elementContainers[i]->GetWorldCenter().y + 5.0f));
-			//rdj.localAnchorA.x += 2.5f;
+
+			rdj.lowerAngle = -0.5f * b2_pi; // -90 degrees
+			rdj.upperAngle = 0.0001f * b2_pi; // 0 degrees - effectively
+			rdj.enableLimit = true;
+
+			rdj.maxMotorTorque = 100.0f;
+			rdj.motorSpeed = 80.0f;
+			rdj.enableMotor = true;
+
 			m_elementBridgeJoints[i] = (b2RevoluteJoint*)m_world->CreateJoint(&rdj);
 		}
 	}
