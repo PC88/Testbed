@@ -18,7 +18,7 @@ public:
 
 	static const uint32 m_elementCount = 8; // number of elements in BST, one over number of nodes to show insertions and deletions.
 	static const uint32 m_elementContainerCount = 7; // number of edges needed to form a container, to represent a Node.
-	static const uint32 m_elementReferences = 1; //m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
+	static const uint32 m_elementReferences = m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
 
 	enum
 	{
@@ -54,6 +54,11 @@ public:
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerXOffset = 2.5f;
 	const float m_ContainerYOffset = 18.5f;
+	// offsets for the opposing container edges 
+	// these need to be separate from containers
+	// as joints dont collide with their bodies
+	const float m_ContainerEdgeXOffset = -3.0f; // arbitrary for now
+	const float m_ContainerEdgeYOffset = 20.0f; // arbitrary for now
 
 
 	// test measure
@@ -74,6 +79,7 @@ public:
 	// Static bodies -PC
 	b2Body* m_elementBridges[e_BSTDemoElementBridges]; // static connecting bodies
 	b2Body* m_elementContainers[e_BSTDemoElementContainers]; // the containers representing Nodes
+	b2Body* m_elementContainerEdges[e_BSTDemoElementContainers];
 
 	// Joints -PC
 	b2RevoluteJoint* m_elementBridgeJoints[e_BSTDemoElementGateJoints]; // joints for the gates

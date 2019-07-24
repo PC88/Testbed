@@ -137,6 +137,7 @@ BSTDemo::BSTDemo()
 			b2EdgeShape shape;
 			shape.Set(b2Vec2(-5.0f, 22.0f), b2Vec2(5.0f, 22.0f)); // magnitude 10.0f
 
+
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
 			if ((m_width * i) != 0)
@@ -187,8 +188,15 @@ BSTDemo::BSTDemo()
 			b2ChainShape shape;
 			shape.CreateChain(nodeShape, 4);
 
+			b2EdgeShape shape2;
+			shape2.Set(b2Vec2(0.0f, 5.0f), b2Vec2(0.0f, 0.0f)); // magnitude 5
+
 			b2BodyDef bd;
+			b2BodyDef bd2;
+
 			bd.type = b2_staticBody;
+			bd2.type = b2_staticBody;
+
 			if ((m_width * i) != 0)
 			{
 
@@ -204,20 +212,25 @@ BSTDemo::BSTDemo()
 				if (calc == 0)
 				{
 					bd.position.Set(-((m_width * YOffsetMultiplier) / 16) - m_ContainerXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerYOffset);
+					bd2.position.Set(-((m_width * YOffsetMultiplier) / 16) - m_ContainerEdgeXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerEdgeYOffset);
 				}
 				else
 				{
 					bd.position.Set((m_width * YOffsetMultiplier) / 16 - m_ContainerXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerYOffset);
+					bd2.position.Set(((m_width * YOffsetMultiplier) / 16) - m_ContainerEdgeXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerEdgeYOffset);
 				}
 			}
 			else
 			{
 				bd.position.Set((m_width * i) / 16 - m_ContainerXOffset, (m_height * i) / 16 + m_ContainerYOffset);
+				bd2.position.Set(((m_width * YOffsetMultiplier) / 16) - m_ContainerEdgeXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerEdgeYOffset);
 			}
 
 			m_elementContainers[i] = m_world->CreateBody(&bd);
+			m_elementContainerEdges[i] = m_world->CreateBody(&bd2);
 
 			m_elementContainers[i]->CreateFixture(&shape, 1.0f);
+			m_elementContainerEdges[i]->CreateFixture(&shape2, 1.0f);
 		}
 
 		// the inclined loader: just a plain the weighted bals run off of, into the Graph
