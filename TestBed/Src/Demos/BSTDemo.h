@@ -18,7 +18,7 @@ public:
 
 	static const uint32 m_elementCount = 8; // number of elements in BST, one over number of nodes to show insertions and deletions.
 	static const uint32 m_elementContainerCount = 7; // number of edges needed to form a container, to represent a Node.
-	static const uint32 m_elementReferences = m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
+	static const uint32 m_elementReferences = 1; //m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
 
 	enum
 	{
@@ -53,7 +53,7 @@ public:
 	const float m_GateYOffset = 25.0f; // worked out via chain positions
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerXOffset = 2.5f;
-	const float m_ContainerYOffset = 20.0f;
+	const float m_ContainerYOffset = 18.5f;
 
 
 	// test measure

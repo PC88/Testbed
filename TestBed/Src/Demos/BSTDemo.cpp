@@ -117,7 +117,7 @@ BSTDemo::BSTDemo()
 			{
 				bd.position.Set((m_width * i) / 16 - m_GateXOffset, ((m_height * i) / 16 + m_GateYOffset));
 			}
-
+			bd.angle = 0.5f; // 30 degrees
 			m_elementGates[i] = m_world->CreateBody(&bd);
 
 			m_elementGates[i]->CreateFixture(&shape, 1.0f);
@@ -135,7 +135,7 @@ BSTDemo::BSTDemo()
 		for (int32 i = 0; i < e_BSTDemoElementBridges; ++i)
 		{
 			b2EdgeShape shape;
-			shape.Set(b2Vec2(-5.0f, 22.0f), b2Vec2(5.0f, 22.0f));
+			shape.Set(b2Vec2(-5.0f, 22.0f), b2Vec2(5.0f, 22.0f)); // magnitude 10.0f
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
@@ -181,9 +181,9 @@ BSTDemo::BSTDemo()
 
 			b2Vec2 nodeShape[4];
 			nodeShape[0].Set(0.0f, 5.0f);
-			nodeShape[1].Set(0.5f, 0.0f);
-			nodeShape[2].Set(4.5f, 0.0f);
-			nodeShape[3].Set(5.0f, 5.0f);
+			nodeShape[1].Set(0.0f, 0.0f);
+			nodeShape[2].Set(2.5f, -5.0f);
+			nodeShape[3].Set(2.5f, 0.0f);
 			b2ChainShape shape;
 			shape.CreateChain(nodeShape, 4);
 
@@ -253,14 +253,14 @@ BSTDemo::BSTDemo()
 		for (int i = 0; i < e_BSTDemoElementGateJoints; ++i)
 		{
 			b2RevoluteJointDef rdj;
-			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x + 5.0f, m_elementContainers[i]->GetWorldCenter().y + 5.0f));
+			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y + 5.0f));
 
-			rdj.lowerAngle = -0.5f * b2_pi; // -90 degrees
-			rdj.upperAngle = 0.0001f * b2_pi; // 0 degrees - effectively
+			rdj.lowerAngle = 0.0001f * b2_pi; // 0 degrees- effectively
+			rdj.upperAngle = 0.5f * b2_pi; // 90 degrees 
 			rdj.enableLimit = true;
 
 			rdj.maxMotorTorque = 100.0f;
-			rdj.motorSpeed = 80.0f;
+			rdj.motorSpeed = -80.0f;
 			rdj.enableMotor = true;
 
 			m_elementBridgeJoints[i] = (b2RevoluteJoint*)m_world->CreateJoint(&rdj);
