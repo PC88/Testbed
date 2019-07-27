@@ -122,6 +122,60 @@ BSTDemo::BSTDemo()
 
 			m_elementGates[i]->CreateFixture(&shape, 1.0f);
 		}
+
+
+
+		// used to help create and even distribution of x/y co-ordinates for elements of the demo.
+		int counter1 = 0;
+		int yOffsetMultiplier1 = 0; // will be 1,2,3 respectively, for each y co-ordinate change, except first
+
+		// define the dynamic joint which is on the lower aspect of the container
+		for (int32 i = 0; i < e_BSTDemoElementBodyJoints; ++i)
+		{
+
+			b2Vec2 nodeShape[3];
+			nodeShape[0].Set(0.0f, 5.0f);
+			nodeShape[1].Set(0.0f, 0.0f);
+			nodeShape[2].Set(5.0f, 0.0f);
+
+			b2ChainShape shape;
+			shape.CreateChain(nodeShape, 4);
+
+			b2BodyDef bd;
+			bd.type = b2_dynamicBody;
+
+			if ((m_width * i) != 0) // if it is not 0: the first element, continue
+			{
+				// if it is not 0, its not the first element in the graph:
+				// place it either left or right side distribution.
+				// (((m_width * i)/8)/2)
+				int calc = (i % 2);
+
+				// this deals with even Y co-ordinate distribution
+				counter1++;
+				if (counter1 % 2 != 0)
+				{
+					yOffsetMultiplier1 += 2;
+				}
+
+				if (calc == 0)
+				{ // if even: no remainder --> left side distribution
+					bd.position.Set(-((m_width * yOffsetMultiplier1) / 16) - m_GateXOffset, (-(m_height * yOffsetMultiplier1) / 16) + m_GateYOffset);
+				}
+				else
+				{ // if odd: there is a remainder --> right side distribution
+					bd.position.Set((m_width * yOffsetMultiplier1) / 16 - m_GateXOffset, (-(m_height * yOffsetMultiplier1) / 16 + m_GateYOffset));
+				}
+			}
+			else // if it is 0, then it is the first gate, place it at the top of graph.
+			{
+				bd.position.Set((m_width * i) / 16 - m_GateXOffset, ((m_height * i) / 16 + m_GateYOffset));
+			}
+			bd.angle = 0.5f; // 30 degrees
+			m_elementJointBodies[i] = m_world->CreateBody(&bd);
+
+			m_elementJointBodies[i]->CreateFixture(&shape, 1.0f);
+		}
 	}
 	/// DEFINE DYNAMIC BODIES ///
 
@@ -266,10 +320,13 @@ BSTDemo::BSTDemo()
 		for (int i = 0; i < e_BSTDemoElementGateJoints; ++i)
 		{
 			b2RevoluteJointDef rdj;
-			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y + 5.0f));
+			b2RevoluteJointDef rdj2;
+			
+			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y - 10.0f));
+			rdj2.Initialize(m_elementJointBodies[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y - 10.0f));
 
 			rdj.lowerAngle = 0.0001f * b2_pi; // 0 degrees- effectively
-			rdj.upperAngle = 0.5f * b2_pi; // 90 degrees 
+			rdj.upperAngle = 0.5f * b2_pi;    // 90 degrees 
 			rdj.enableLimit = true;
 
 			rdj.maxMotorTorque = 100.0f;
@@ -277,6 +334,7 @@ BSTDemo::BSTDemo()
 			rdj.enableMotor = true;
 
 			m_elementBridgeJoints[i] = (b2RevoluteJoint*)m_world->CreateJoint(&rdj);
+			m_elementNodeJoints[i] = (b2RevoluteJoint*)m_world->CreateJoint(&rdj2);
 		}
 	}
 	/// DEFINE THE JOINTS WHICH CONNECT BODIES ///

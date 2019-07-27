@@ -25,7 +25,8 @@ public:
 		e_BSTDemoElements = m_elementCount,
 		e_BSTDemoElementBridges = m_elementReferences,
 		e_BSTDemoElementGateJoints = m_elementContainerCount, // one joint per container
-		e_BSTDemoElementContainers = m_elementContainerCount
+		e_BSTDemoElementContainers = m_elementContainerCount,
+		e_BSTDemoElementBodyJoints = m_elementContainerCount
 	};
 
 	
@@ -59,6 +60,10 @@ public:
 	// as joints dont collide with their bodies
 	const float m_ContainerEdgeXOffset = -3.0f; // arbitrary for now
 	const float m_ContainerEdgeYOffset = 20.0f; // arbitrary for now
+    // the off sets for the joint bodies which are the locking
+	// mechanism for the Nodes
+	const float m_ContainerJointXOffset = -3.0f; // arbitrary for now
+	const float m_ContainerJointYOffset = 20.0f; // arbitrary for now
 
 
 	// test measure
@@ -77,12 +82,14 @@ public:
 	b2Body* m_elementGates[e_BSTDemoElements]; // weighted gates
 
 	// Static bodies -PC
-	b2Body* m_elementBridges[e_BSTDemoElementBridges]; // static connecting bodies
+	b2Body* m_elementBridges[e_BSTDemoElementBridges];       // static connecting bodies
 	b2Body* m_elementContainers[e_BSTDemoElementContainers]; // the containers representing Nodes
 	b2Body* m_elementContainerEdges[e_BSTDemoElementContainers];
+	b2Body* m_elementJointBodies[e_BSTDemoElementBodyJoints];
 
 	// Joints -PC
 	b2RevoluteJoint* m_elementBridgeJoints[e_BSTDemoElementGateJoints]; // joints for the gates
+	b2RevoluteJoint* m_elementNodeJoints[e_BSTDemoElementBodyJoints];   // joints for the nodes
 
 };
 
