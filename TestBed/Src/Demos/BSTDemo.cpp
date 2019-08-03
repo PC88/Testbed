@@ -139,7 +139,7 @@ BSTDemo::BSTDemo()
 			nodeShape[2].Set(5.0f, 0.0f);
 
 			b2ChainShape shape;
-			shape.CreateChain(nodeShape, 4);
+			shape.CreateChain(nodeShape, 3);
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
@@ -160,16 +160,16 @@ BSTDemo::BSTDemo()
 
 				if (calc == 0)
 				{ // if even: no remainder --> left side distribution
-					bd.position.Set(-((m_width * yOffsetMultiplier1) / 16) - m_GateXOffset, (-(m_height * yOffsetMultiplier1) / 16) + m_GateYOffset);
+					bd.position.Set(-((m_width * yOffsetMultiplier1) / 16) - m_InnerGateXOffset, (-(m_height * yOffsetMultiplier1) / 16) + m_InnerGateYOffset);
 				}
 				else
 				{ // if odd: there is a remainder --> right side distribution
-					bd.position.Set((m_width * yOffsetMultiplier1) / 16 - m_GateXOffset, (-(m_height * yOffsetMultiplier1) / 16 + m_GateYOffset));
+					bd.position.Set((m_width * yOffsetMultiplier1) / 16 - m_InnerGateXOffset, (-(m_height * yOffsetMultiplier1) / 16 + m_InnerGateYOffset));
 				}
 			}
 			else // if it is 0, then it is the first gate, place it at the top of graph.
 			{
-				bd.position.Set((m_width * i) / 16 - m_GateXOffset, ((m_height * i) / 16 + m_GateYOffset));
+				bd.position.Set((m_width * i) / 16 - m_InnerGateXOffset, ((m_height * i) / 16 + m_InnerGateYOffset));
 			}
 			bd.angle = 0.5f; // 30 degrees
 			m_elementJointBodies[i] = m_world->CreateBody(&bd);

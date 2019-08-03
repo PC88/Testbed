@@ -52,6 +52,9 @@ public:
 	// offset for Gates
 	const float m_GateXOffset = 0.0f; // worked out via chain positions
 	const float m_GateYOffset = 25.0f; // worked out via chain positions
+	// offset for inner gates
+	const float m_InnerGateXOffset = 0.0f;
+	const float m_InnerGateYOffset = 19.0f;
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerXOffset = 2.5f;
 	const float m_ContainerYOffset = 18.5f;
