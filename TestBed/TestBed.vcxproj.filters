@@ -210,6 +210,12 @@
     <ClCompile Include="Vendor\Box2D\Common\DebugDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Exceptions\ZeroDevideException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Exceptions\NegativeRootException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vendor\glm\detail\_features.hpp">
@@ -1131,6 +1137,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Demos\DemoSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Exceptions\RuntimeException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Exceptions\ZeroDevideException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Exceptions\NegativeRootException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -58,7 +58,7 @@ public:
 	// offsets for the opposing container edges 
 	// these need to be separate from containers
 	// as joints dont collide with their bodies
-	const float m_ContainerEdgeXOffset = -3.0f; // arbitrary for now
+	const float m_ContainerEdgeXOffset = -3.0f; // arbitrary for now 
 	const float m_ContainerEdgeYOffset = 20.0f; // arbitrary for now
     // the off sets for the joint bodies which are the locking
 	// mechanism for the Nodes

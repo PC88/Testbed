@@ -121,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Src\Exceptions\NegativeRootException.cpp" />
     <ClCompile Include="Src\Demos\BSTDemo.cpp" />
     <ClCompile Include="Src\Demos\QuadTreeDemo.cpp" />
     <ClCompile Include="Src\BST\BSTNode.cpp" />
@@ -185,8 +186,11 @@
     <ClCompile Include="Vendor\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="Vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Vendor\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Src\Exceptions\ZeroDevideException.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Exceptions\NegativeRootException.h" />
+    <ClInclude Include="Src\Exceptions\RuntimeException.h" />
     <ClInclude Include="Src\Demos\BSTDemo.h" />
     <ClInclude Include="Src\Demos\DemoSettings.h" />
     <ClInclude Include="Src\Demos\QuadTreeDemo.h" />
@@ -494,6 +498,7 @@
     <ClInclude Include="Vendor\imgui\imstb_rectpack.h" />
     <ClInclude Include="Vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="Vendor\imgui\imstb_truetype.h" />
+    <ClInclude Include="Src\Exceptions\ZeroDevideException.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Vendor\glm\detail\func_common.inl" />
