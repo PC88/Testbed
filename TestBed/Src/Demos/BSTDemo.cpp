@@ -322,8 +322,10 @@ BSTDemo::BSTDemo()
 			b2RevoluteJointDef rdj;
 			b2RevoluteJointDef rdj2;
 			
-			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y - 10.0f));
-			rdj2.Initialize(m_elementJointBodies[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x, m_elementContainers[i]->GetWorldCenter().y - 10.0f));
+			rdj.Initialize(m_elementGates[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x + m_GateRJXOffset, //x
+				m_elementContainers[i]->GetWorldCenter().y + m_GateRJYOffset)); //y
+			rdj2.Initialize(m_elementJointBodies[i], m_elementContainers[i], b2Vec2(m_elementContainers[i]->GetWorldCenter().x + m_InnerGateXOffset, //x
+				m_elementContainers[i]->GetWorldCenter().y - m_InnerGateRJYOffset)); //y
 
 			rdj.lowerAngle = 0.0001f * b2_pi; // 0 degrees- effectively
 			rdj.upperAngle = 0.5f * b2_pi;    // 90 degrees 

@@ -50,23 +50,29 @@ public:
 	// offset for bridges
 	const float m_BridgeOffset = 10.0f;
 	// offset for Gates
-	const float m_GateXOffset = 0.0f; // worked out via chain positions
+	const float m_GateXOffset = 0.0f;  // worked out via chain positions
 	const float m_GateYOffset = 25.0f; // worked out via chain positions
 	// offset for inner gates
-	const float m_InnerGateXOffset = 0.0f;
-	const float m_InnerGateYOffset = 19.0f;
+	const float m_InnerGateXOffset = 0.0f;  // worked out via chain positions
+	const float m_InnerGateYOffset = 18.5f; // worked out via chain positions
 	// offset for containers, they represent what the Nodes in a BST store.
 	const float m_ContainerXOffset = 2.5f;
 	const float m_ContainerYOffset = 18.5f;
 	// offsets for the opposing container edges 
 	// these need to be separate from containers
-	// as joints dont collide with their bodies
+	// as joints do not collide with their bodies
 	const float m_ContainerEdgeXOffset = -3.0f; // arbitrary for now 
 	const float m_ContainerEdgeYOffset = 20.0f; // arbitrary for now
-    // the off sets for the joint bodies which are the locking
+    // the offsets for the joint bodies which are the locking
 	// mechanism for the Nodes
 	const float m_ContainerJointXOffset = -3.0f; // arbitrary for now
 	const float m_ContainerJointYOffset = 20.0f; // arbitrary for now
+	// offsets for the revolute joints: sets the rotating point
+	const float m_GateRJYOffset = 5.0f;
+	const float m_GateRJXOffset = 0.0f;
+	// inner gates
+	const float m_InnerGateRJYOffset = -1.5f;
+	const float m_InnerGateRJXOffset = 0.0f;
 
 
 	// test measure
