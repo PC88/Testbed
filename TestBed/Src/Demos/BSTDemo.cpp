@@ -90,6 +90,9 @@ BSTDemo::BSTDemo()
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 
+			float currentParentPos; // keep track of which is the parent node now
+			float nextParentPos;    // track which is the upcoming parent node
+
 			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
 				// if it is not 0, its not the first element in the graph:

@@ -4,6 +4,9 @@
 #include "Box2D\Common\DebugDraw.h"
 
 
+// TODO: look to refactor code of distributions, in to a serise of functions for readability
+
+
 class BSTDemo :
 	public Demo
 {
@@ -20,16 +23,28 @@ public:
 	static const uint32 m_elementContainerCount = 7; // number of edges needed to form a container, to represent a Node.
 	static const uint32 m_elementReferences = m_BSTdepth * 2; // references = Depth * 2 - 2 refs per node
 
-	enum
+	enum // keeps track of the components making up the demo: all the node parts, and references
 	{
 		e_BSTDemoElements = m_elementCount,
 		e_BSTDemoElementBridges = m_elementReferences,
-		e_BSTDemoElementGateJoints = m_elementContainerCount, // one joint per container
+		e_BSTDemoElementGateJoints = m_elementContainerCount, // same value for each Enum, just for clarity as the system has alot of parts.
 		e_BSTDemoElementContainers = m_elementContainerCount,
 		e_BSTDemoElementBodyJoints = m_elementContainerCount
 	};
 
-	
+	enum // elements double per row, just a way to workout each row via elements
+	{
+		e_Row1Count = 1,
+		e_Row2Count = 2,
+		e_Row3Count = 4,
+	};
+
+	enum // just a convenient value for inner counters of the distribution algorithm
+	{
+		e_CounterTwo = 2,
+		e_CounterFour = 4,
+		e_CounterEight = 8
+	};
 
 	void Box2DStart() override;
 	void Box2DEnd() override;
