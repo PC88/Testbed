@@ -5,7 +5,7 @@
 
 
 // TODO: look to refactor code of distributions, in to a serise of functions for readability
-
+// REMINDER: left right by offset on gates, perhaps refactor values
 
 class BSTDemo :
 	public Demo

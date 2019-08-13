@@ -88,17 +88,17 @@ BSTDemo::BSTDemo()
 			shape.SetAsBox(2.5f, 0.25f);
 
 			b2BodyDef bd;
-			bd.type = b2_dynamicBody;
+			//bd.type = b2_dynamicBody;
 
-			float currentParentPos; // keep track of which is the parent node now
-			float nextParentPos;    // track which is the upcoming parent node
+			b2Vec2 currentParentPos; // keep track of which is the parent node now
+			b2Vec2 nextParentPos;    // track which is the upcoming parent node
 
 			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
 				// if it is not 0, its not the first element in the graph:
 				// place it either left or right side distribution.
 				// (((m_width * i)/8)/2)
-				int calc = (i % 2);
+				float calc = (i % 2);
 
 				// this deals with even Y co-ordinate distribution
 				counter++;
@@ -109,16 +109,18 @@ BSTDemo::BSTDemo()
 
 				if (calc == 0)
 				{ // if even: no remainder --> left side distribution
-					bd.position.Set(-((m_width * yOffsetMultiplier) / 16) - m_GateXOffset, (-(m_height * yOffsetMultiplier) / 16) + m_GateYOffset);
+					bd.position.Set(currentParentPos.x - ((m_width * yOffsetMultiplier) / 16) - m_GateXOffset, currentParentPos.y - (-(m_height * yOffsetMultiplier) / 16 + m_GateYOffset)); // bracket in wrong position
+					currentParentPos = bd.position;
 				}
 				else
 				{ // if odd: there is a remainder --> right side distribution
-					bd.position.Set((m_width * yOffsetMultiplier) / 16 - m_GateXOffset, (-(m_height * yOffsetMultiplier) / 16 + m_GateYOffset));
+					bd.position.Set(currentParentPos.x + (m_width * yOffsetMultiplier) / 16 - m_GateXOffset, currentParentPos.y - (-(m_height * yOffsetMultiplier) / 16 + m_GateYOffset));
 				}
 			}
-			else // if it is 0, then it is the first gate, place it at the top of graph.
+			else // if it is 0, then it is the first gate, place it at the top of graph centre.
 			{
 				bd.position.Set((m_width * i) / 16 - m_GateXOffset, ((m_height * i) / 16 + m_GateYOffset));
+				currentParentPos = bd.position; // set initial node to parent
 			}
 			bd.angle = 0.5f; // 30 degrees
 			m_elementGates[i] = m_world->CreateBody(&bd);
@@ -147,6 +149,9 @@ BSTDemo::BSTDemo()
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 
+			b2Vec2 currentParentPos; // keep track of which is the parent node now
+			b2Vec2 nextParentPos;    // track which is the upcoming parent node
+
 			if ((m_width * i) != 0) // if it is not 0: the first element, continue
 			{
 				// if it is not 0, its not the first element in the graph:
@@ -173,6 +178,7 @@ BSTDemo::BSTDemo()
 			else // if it is 0, then it is the first gate, place it at the top of graph.
 			{
 				bd.position.Set((m_width * i) / 16 - m_InnerGateXOffset, ((m_height * i) / 16 + m_InnerGateYOffset));
+				currentParentPos = bd.position; // set initial node to parent
 			}
 			bd.angle = 0.5f; // 30 degrees
 			m_elementJointBodies[i] = m_world->CreateBody(&bd);
@@ -197,6 +203,10 @@ BSTDemo::BSTDemo()
 
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
+
+			b2Vec2 currentParentPos; // keep track of which is the parent node now
+			b2Vec2 nextParentPos;    // track which is the upcoming parent node
+
 			if ((m_width * i) != 0)
 			{
 
@@ -221,6 +231,7 @@ BSTDemo::BSTDemo()
 			else
 			{
 				bd.position.Set((m_width * i) / 16, (m_height * i) / 16 + m_BridgeOffset);
+				currentParentPos = bd.position; // set initial node to parent
 			}
 
 			m_elementBridges[i] = m_world->CreateBody(&bd);
@@ -254,6 +265,9 @@ BSTDemo::BSTDemo()
 			bd.type = b2_staticBody;
 			bd2.type = b2_staticBody;
 
+			b2Vec2 currentParentPos; // keep track of which is the parent node now
+			b2Vec2 nextParentPos;    // track which is the upcoming parent node
+
 			if ((m_width * i) != 0)
 			{
 
@@ -281,6 +295,8 @@ BSTDemo::BSTDemo()
 			{
 				bd.position.Set((m_width * i) / 16 - m_ContainerXOffset, (m_height * i) / 16 + m_ContainerYOffset);
 				bd2.position.Set(((m_width * YOffsetMultiplier) / 16) - m_ContainerEdgeXOffset, -(m_height * YOffsetMultiplier) / 16 + m_ContainerEdgeYOffset);
+
+				currentParentPos = bd.position; // set initial node to parent
 			}
 
 			m_elementContainers[i] = m_world->CreateBody(&bd);
